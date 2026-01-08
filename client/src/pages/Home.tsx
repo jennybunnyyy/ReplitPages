@@ -273,7 +273,7 @@ export default function Home() {
             </h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
             {/* Left - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
