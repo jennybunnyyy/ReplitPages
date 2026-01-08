@@ -440,6 +440,61 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Weight Loss Injection Benefits */}
+      <section className="py-20 lg:py-28 bg-[#F5F0E8]">
+        <div className="container mx-auto px-4">
+          <motion.h2 
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 text-center text-foreground tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            WEIGHT LOSS INJECTION BENEFITS
+          </motion.h2>
+          
+          <motion.div 
+            className="max-w-5xl mx-auto mb-12 space-y-6 text-foreground"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <p className="text-base lg:text-lg leading-relaxed">
+              When considering a weight loss plan, people want to know the benefits and drawbacks of phentermine vs. GLP-1 weight loss injections.
+            </p>
+            <p className="text-base lg:text-lg leading-relaxed">
+              Phentermine is a widely-used diet pill and appetite suppressant that is more affordable than weight loss shots. But there's a catch—it's only approved for short-term use. On the other hand, GLP-1 is a suitable option for those seeking a long-term weight loss solution. Not only does it help with weight management, but it also treats Type-2 diabetes and improves glycemic control.
+            </p>
+            <p className="text-base lg:text-lg leading-relaxed">
+              GLP-1 offers a plethora of benefits. You only need one injection per week to experience reduced appetite, increased metabolism, and quicker weight loss. Men and women turn to this revolutionary treatment because:
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
+            {[
+              { text: "Increases the body's ability to burn fat.", bg: "bg-[#E8D5D0]" },
+              { text: "It suppresses your appetite, so you don't get hunger pangs as often.", bg: "bg-[#F5E6E0]" },
+              { text: "It decreases your food intake and, as a result, reduces your body's fat mass.", bg: "bg-[#E8D5D0]" },
+              { text: "It's a reliable long-term weight management option.", bg: "bg-[#F5E6E0]" }
+            ].map((benefit, index) => (
+              <motion.div
+                key={index}
+                className={`relative h-80 lg:h-96 ${benefit.bg} flex items-start justify-center pt-6 px-4`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                data-testid={`card-benefit-${index}`}
+              >
+                <p className="text-center text-sm lg:text-base font-medium text-foreground leading-relaxed max-w-[200px]">
+                  {benefit.text}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-20 lg:py-32 bg-gradient-soft">
         <div className="container mx-auto px-4">
