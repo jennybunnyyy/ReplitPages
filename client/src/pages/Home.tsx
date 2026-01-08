@@ -195,19 +195,17 @@ export default function Home() {
                   data-testid="img-hero"
                 />
                 
-                {/* Floating Badge */}
+                {/* Gold Emblem Badge */}
                 <motion.div 
-                  className="absolute -bottom-4 -left-4 lg:bottom-8 lg:-left-8 bg-white rounded-2xl shadow-xl p-4 border border-border/50"
+                  className="absolute -bottom-4 -left-4 lg:bottom-8 lg:-left-8"
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Star className="w-6 h-6 text-primary fill-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-foreground">Top Rated</p>
-                      <p className="text-xs text-muted-foreground">Med Spa 2024</p>
+                  <div className="w-28 h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 p-1 shadow-xl">
+                    <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-400 flex flex-col items-center justify-center text-center border-2 border-amber-200/50">
+                      <Star className="w-5 h-5 text-amber-800 fill-amber-700 mb-1" />
+                      <p className="text-[10px] lg:text-xs font-bold text-amber-900 uppercase tracking-wide leading-tight px-2">Top Rated</p>
+                      <p className="text-[10px] lg:text-xs font-bold text-amber-800 uppercase tracking-wide leading-tight px-2">Medical Spa</p>
                     </div>
                   </div>
                 </motion.div>
