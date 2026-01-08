@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import heroImage from "@assets/generated_images/fit_woman_body_portrait.png";
 import logoImage from "@assets/Copy_of_TBA_LOGO_UPDATE_GOOGLE_(Facebook_Cover)_(1)_1767900892576.png";
+import badgeImage from "@assets/top-rated-med-spa-badge_1767906092825.webp";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -201,13 +202,12 @@ export default function Home() {
                   animate={{ y: [0, -8, 0] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <div className="w-28 h-28 lg:w-32 lg:h-32 rounded-full bg-gradient-to-br from-amber-300 via-yellow-400 to-amber-500 p-1 shadow-xl">
-                    <div className="w-full h-full rounded-full bg-gradient-to-br from-amber-400 via-yellow-300 to-amber-400 flex flex-col items-center justify-center text-center border-2 border-amber-200/50">
-                      <Star className="w-5 h-5 text-amber-800 fill-amber-700 mb-1" />
-                      <p className="text-[10px] lg:text-xs font-bold text-amber-900 uppercase tracking-wide leading-tight px-2">Top Rated</p>
-                      <p className="text-[10px] lg:text-xs font-bold text-amber-800 uppercase tracking-wide leading-tight px-2">Medical Spa</p>
-                    </div>
-                  </div>
+                  <img 
+                    src={badgeImage} 
+                    alt="Top Rated Medical Spa" 
+                    className="w-28 h-28 lg:w-32 lg:h-32 drop-shadow-xl"
+                    data-testid="img-badge"
+                  />
                 </motion.div>
               </div>
             </motion.div>
