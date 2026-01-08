@@ -246,7 +246,7 @@ export default function Home() {
                 <img 
                   src={logo.image} 
                   alt={logo.name} 
-                  className="h-8 md:h-10 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                  className="h-10 md:h-12 w-auto opacity-70 hover:opacity-100 transition-opacity"
                 />
               </div>
             ))}
