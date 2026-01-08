@@ -254,11 +254,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="py-20 lg:py-32 bg-background">
+      {/* Results Section with Lead Form */}
+      <section id="book" className="py-20 lg:py-32 bg-background">
         <div className="container mx-auto px-4">
           <motion.div 
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -268,87 +268,44 @@ export default function Home() {
               Lasting Weight Loss Results from the{" "}
               <span className="text-gradient">#1 Clinic</span> in California
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Kickstart your weight loss journey and conquer stubborn, exercise and diet-resistant fat. 
-              Combining a nutritious diet with weight loss injections is an effective way to achieve your goals.
-            </p>
           </motion.div>
 
-          {/* Benefit Icons */}
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {treatmentBenefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                className="text-center p-8 rounded-3xl bg-white shadow-lg border border-border/50 hover:shadow-xl transition-shadow"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                data-testid={`card-benefit-${index}`}
-              >
-                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl flex items-center justify-center">
-                  <benefit.icon className="w-8 h-8 text-primary" />
-                </div>
-                <h3 className="font-display text-xl font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Lead Form Section */}
-      <section id="book" className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-6xl mx-auto">
+            {/* Left - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="inline-block px-4 py-2 bg-primary text-white rounded-full text-sm font-semibold mb-6">
-                NEW CLIENT SPECIAL
-              </div>
-              <h2 className="font-display text-4xl lg:text-5xl font-semibold mb-6">
-                Get <span className="text-gradient">$50 Off</span>
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Schedule your consultation today and take the first step toward your weight loss goals. 
-                Our expert team is ready to create a personalized treatment plan just for you.
+              <h3 className="font-display text-2xl font-semibold mb-6">
+                Kickstart your weight loss journey and conquer stubborn, exercise and diet-resistant fat.
+              </h3>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                Combining a nutritious diet with weight loss injections is an effective way to achieve your weight loss goals. This medical treatment helps your body burn fat efficiently by curbing your appetite. It's an excellent option for men and women wanting to shed pounds without feeling hungry all the time.
               </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-primary" />
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                If you're thinking about using weight loss injections, Total Body Aesthetics is a leading provider of weight loss injections in Los Angeles, CA. Get in touch by calling <a href="tel:+13106701920" className="text-primary font-semibold hover:underline">(310) 670-1920</a> to book an online, telehealth or in-person consultation.
+              </p>
+
+              {/* Benefit Icons */}
+              <div className="grid grid-cols-3 gap-4">
+                {treatmentBenefits.map((benefit, index) => (
+                  <div
+                    key={index}
+                    className="text-center p-4 rounded-2xl bg-white shadow-md border border-border/50"
+                    data-testid={`card-benefit-${index}`}
+                  >
+                    <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center">
+                      <benefit.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <h4 className="font-display text-sm font-semibold">{benefit.title}</h4>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Call Us</p>
-                    <p className="font-semibold text-foreground">(310) 670-1920</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Location</p>
-                    <p className="font-semibold text-foreground">Westchester, Los Angeles, CA</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Clock className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Hours</p>
-                    <p className="font-semibold text-foreground">Mon-Sat: 9AM - 6PM</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </motion.div>
 
+            {/* Right - Lead Form */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -360,11 +317,17 @@ export default function Home() {
                 className="bg-white rounded-3xl shadow-xl p-8 border border-border/50"
                 data-testid="form-lead"
               >
-                <h3 className="font-display text-2xl font-semibold mb-6 text-center">Book Your Consultation</h3>
+                <div className="text-center mb-6">
+                  <div className="inline-block px-4 py-2 bg-primary text-white rounded-full text-sm font-semibold mb-3">
+                    NEW CLIENT SPECIAL
+                  </div>
+                  <h3 className="font-display text-3xl font-semibold">Get $50 Off</h3>
+                  <p className="text-primary font-semibold mt-2">(310) 670-1920</p>
+                </div>
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium mb-2">Full Name</label>
+                    <label className="block text-sm font-medium mb-2">Name</label>
                     <Input 
                       type="text"
                       placeholder="Enter your name"
@@ -389,7 +352,7 @@ export default function Home() {
                     <label className="block text-sm font-medium mb-2">Phone</label>
                     <Input 
                       type="tel"
-                      placeholder="Enter your phone"
+                      placeholder="(999) 999-9999"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       className="w-full py-6 px-4 rounded-xl"
@@ -405,9 +368,8 @@ export default function Home() {
                     Get $50 Off Now
                   </Button>
                   
-                  <p className="text-xs text-muted-foreground text-center mt-4">
-                    By submitting this form, I consent to be contacted by Total Body Aesthetics. 
-                    Message and data rates may apply.
+                  <p className="text-xs text-muted-foreground text-center mt-4 leading-relaxed">
+                    *By submitting this form, I consent to be contacted by Total Body Aesthetics via phone, text, email, or mail. Message and data rates may apply. Consent is not a condition of purchase. I agree to the <a href="#" className="underline">Terms of Service</a> and acknowledge the <a href="#" className="underline">Privacy Policy</a>. Reply STOP to opt out.
                   </p>
                 </div>
               </form>
