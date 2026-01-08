@@ -17,7 +17,7 @@ import cosmoLogoImage from "@assets/Cosmopolitan-Logo_1767906834373.webp";
 import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-fat_1767907312171.webp";
 import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
 import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
-import howItWorksImage from "@assets/generated_images/fit_woman_great_figure.png";
+import howItWorksImage from "@assets/generated_images/elegant_woman_black_outfit.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
