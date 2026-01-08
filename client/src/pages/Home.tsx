@@ -385,7 +385,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 lg:py-32 bg-gradient-soft overflow-hidden">
+      <section className="py-20 lg:py-32 bg-gradient-to-b from-white to-[#F5F0E8] overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl mx-auto">
             {/* Left - Image */}
