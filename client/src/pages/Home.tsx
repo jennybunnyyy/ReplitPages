@@ -18,6 +18,10 @@ import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-
 import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
 import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
 import howItWorksImage from "@assets/generated_images/elegant_woman_black_outfit.png";
+import benefitImage1 from "@assets/stock_images/confident_woman_with_3af37fdd.jpg";
+import benefitImage2 from "@assets/stock_images/happy_mature_couple__11daf9ff.jpg";
+import benefitImage3 from "@assets/stock_images/fit_man_giving_thumb_72c838b3.jpg";
+import benefitImage4 from "@assets/stock_images/woman_stretching_arm_d32c7bdc.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -470,25 +474,34 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { text: "Increases the body's ability to burn fat.", bg: "bg-[#E8D5D0]" },
-              { text: "It suppresses your appetite, so you don't get hunger pangs as often.", bg: "bg-[#F5E6E0]" },
-              { text: "It decreases your food intake and, as a result, reduces your body's fat mass.", bg: "bg-[#E8D5D0]" },
-              { text: "It's a reliable long-term weight management option.", bg: "bg-[#F5E6E0]" }
+              { text: "Increases the body's ability to burn fat.", bg: "bg-[#DCAFAB]", image: benefitImage1 },
+              { text: "It suppresses your appetite, so you don't get hunger pangs as often.", bg: "bg-[#F5DDD8]", image: benefitImage2 },
+              { text: "It decreases your food intake and, as a result, reduces your body's fat mass.", bg: "bg-[#DCAFAB]", image: benefitImage3 },
+              { text: "It's a reliable long-term weight management option.", bg: "bg-[#F5DDD8]", image: benefitImage4 }
             ].map((benefit, index) => (
               <motion.div
                 key={index}
-                className={`relative h-80 lg:h-96 ${benefit.bg} flex items-start justify-center pt-6 px-4`}
+                className={`relative h-80 lg:h-[420px] ${benefit.bg} rounded-2xl overflow-hidden flex flex-col`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 data-testid={`card-benefit-${index}`}
               >
-                <p className="text-center text-sm lg:text-base font-medium text-foreground leading-relaxed max-w-[200px]">
-                  {benefit.text}
-                </p>
+                <div className="pt-5 px-4 pb-3">
+                  <p className="text-center text-sm lg:text-base font-medium text-foreground leading-relaxed">
+                    {benefit.text}
+                  </p>
+                </div>
+                <div className="flex-1 relative overflow-hidden">
+                  <img 
+                    src={benefit.image} 
+                    alt="Weight loss benefit" 
+                    className="absolute inset-0 w-full h-full object-cover object-top"
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
