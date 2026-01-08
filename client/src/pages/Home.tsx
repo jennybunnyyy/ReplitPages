@@ -387,7 +387,7 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-20 lg:py-32 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-stretch max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl mx-auto">
             {/* Left - Image */}
             <motion.div
               className="relative order-2 lg:order-1"
@@ -399,15 +399,15 @@ export default function Home() {
               <img 
                 src={howItWorksImage} 
                 alt="Weight loss transformation" 
-                className="relative w-full max-w-lg mx-auto lg:max-w-full rounded-2xl"
+                className="relative w-full max-w-md mx-auto lg:max-w-full"
                 data-testid="img-how-it-works"
               />
             </motion.div>
 
             {/* Right - Steps */}
-            <div className="order-1 lg:order-2">
+            <div className="order-1 lg:order-2 flex flex-col">
               <motion.h2 
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-10 text-primary"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 text-primary"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -415,22 +415,22 @@ export default function Home() {
                 How It Works
               </motion.h2>
               
-              <div className="flex flex-col justify-center gap-8">
+              <div className="flex flex-col gap-6">
                 {howItWorks.map((step, index) => (
                   <motion.div
                     key={index}
-                    className="flex gap-6 items-center bg-secondary/50 rounded-2xl p-5 lg:p-6 border border-border/30"
+                    className="flex gap-5 items-start bg-white rounded-3xl p-6 shadow-md border border-secondary/50"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.15 }}
                     data-testid={`card-step-${index}`}
                   >
-                    <div className="flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-3xl lg:text-4xl font-display font-semibold text-white">{index + 1}</span>
+                    <div className="flex-shrink-0 w-16 h-16 bg-secondary rounded-full flex items-center justify-center">
+                      <span className="text-3xl font-display font-semibold text-primary">{index + 1}</span>
                     </div>
-                    <div>
-                      <p className="text-base lg:text-lg text-foreground leading-relaxed">{step.description}</p>
+                    <div className="pt-2">
+                      <p className="text-base text-foreground leading-relaxed">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}
