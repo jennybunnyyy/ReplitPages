@@ -415,22 +415,22 @@ export default function Home() {
                 How It Works
               </motion.h2>
               
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-7">
                 {howItWorks.map((step, index) => (
                   <motion.div
                     key={index}
-                    className="flex gap-6 items-start bg-white rounded-3xl p-7 shadow-md border border-secondary/50"
+                    className="flex gap-7 items-start bg-white rounded-3xl p-8 shadow-md border border-secondary/50"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.15 }}
                     data-testid={`card-step-${index}`}
                   >
-                    <div className="flex-shrink-0 w-20 h-20 bg-secondary rounded-full flex items-center justify-center">
-                      <span className="text-4xl font-display font-semibold text-primary">{index + 1}</span>
+                    <div className="flex-shrink-0 w-24 h-24 bg-secondary rounded-full flex items-center justify-center">
+                      <span className="text-5xl font-display font-semibold text-primary">{index + 1}</span>
                     </div>
-                    <div className="pt-3">
-                      <p className="text-lg text-foreground leading-relaxed">{step.description}</p>
+                    <div className="pt-4">
+                      <p className="text-xl text-foreground leading-relaxed">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}
