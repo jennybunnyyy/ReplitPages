@@ -415,7 +415,7 @@ export default function Home() {
                 How It Works
               </motion.h2>
               
-              <div className="flex flex-col justify-between h-full gap-6 lg:gap-0">
+              <div className="flex flex-col justify-center gap-5">
                 {howItWorks.map((step, index) => (
                   <motion.div
                     key={index}
