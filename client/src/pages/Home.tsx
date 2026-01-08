@@ -17,6 +17,7 @@ import cosmoLogoImage from "@assets/Cosmopolitan-Logo_1767906834373.webp";
 import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-fat_1767907312171.webp";
 import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
 import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
+import howItWorksImage from "@assets/generated_images/fit_woman_great_figure.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -384,7 +385,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section className="py-20 lg:py-32 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center max-w-3xl mx-auto mb-16"
@@ -400,30 +401,46 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {howItWorks.map((step, index) => (
-              <motion.div
-                key={index}
-                className="relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                data-testid={`card-step-${index}`}
-              >
-                <div className="text-center p-8">
-                  <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-lg">
-                    <span className="text-2xl font-bold text-white">{step.step}</span>
+          <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
+            {/* Left - Steps */}
+            <div className="space-y-6">
+              {howItWorks.map((step, index) => (
+                <motion.div
+                  key={index}
+                  className="flex gap-6 items-start"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  data-testid={`card-step-${index}`}
+                >
+                  <div className="flex-shrink-0 w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center shadow-lg">
+                    <span className="text-xl font-bold text-white">{step.step}</span>
                   </div>
-                  <h3 className="font-display text-xl font-semibold mb-3">{step.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{step.description}</p>
-                </div>
-                
-                {index < howItWorks.length - 1 && (
-                  <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-0.5 bg-gradient-to-r from-primary/20 to-accent/20" />
-                )}
-              </motion.div>
-            ))}
+                  <div>
+                    <h3 className="font-display text-xl font-semibold mb-2">{step.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Right - Image */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl blur-2xl" />
+              <img 
+                src={howItWorksImage} 
+                alt="Weight loss transformation" 
+                className="relative w-full max-w-md mx-auto lg:max-w-full rounded-3xl shadow-2xl"
+                data-testid="img-how-it-works"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
