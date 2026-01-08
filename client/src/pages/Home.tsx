@@ -4,6 +4,7 @@ import { Check, Phone, MapPin, Clock, Flame, Apple, Scale, ChevronRight, Star, Q
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import heroImage from "@assets/generated_images/fit_woman_body_portrait.png";
+import logoImage from "@assets/Copy_of_TBA_LOGO_UPDATE_GOOGLE_(Facebook_Cover)_(1)_1767900892576.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -102,6 +103,18 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Header with Logo */}
+      <header className="absolute top-0 left-0 right-0 z-50 py-4">
+        <div className="container mx-auto px-4">
+          <img 
+            src={logoImage} 
+            alt="Total Body Aesthetics" 
+            className="h-16 md:h-20 w-auto"
+            data-testid="img-logo-header"
+          />
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="relative min-h-screen bg-gradient-hero overflow-hidden">
         <div className="absolute inset-0 opacity-30">
@@ -519,7 +532,12 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
-              <h3 className="font-display text-xl font-semibold text-white mb-4">Total Body Aesthetics</h3>
+              <img 
+                src={logoImage} 
+                alt="Total Body Aesthetics" 
+                className="h-14 w-auto mb-4 brightness-0 invert opacity-90"
+                data-testid="img-logo-footer"
+              />
               <p className="text-sm leading-relaxed">
                 The #1 weight loss clinic in California, helping patients achieve lasting results with GLP-1 medications.
               </p>
