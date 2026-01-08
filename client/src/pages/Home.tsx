@@ -18,10 +18,10 @@ import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-
 import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
 import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
 import howItWorksImage from "@assets/generated_images/elegant_woman_black_outfit.png";
-import benefitImage1 from "@assets/stock_images/confident_woman_with_3af37fdd.jpg";
-import benefitImage2 from "@assets/stock_images/happy_mature_couple__11daf9ff.jpg";
-import benefitImage3 from "@assets/stock_images/fit_man_giving_thumb_72c838b3.jpg";
-import benefitImage4 from "@assets/stock_images/woman_stretching_arm_d32c7bdc.jpg";
+import benefitImage1 from "@assets/stock_images/athletic_fit_woman_p_badbdbd8.jpg";
+import benefitImage2 from "@assets/stock_images/athletic_couple_fitn_f4a885c2.jpg";
+import benefitImage3 from "@assets/stock_images/athletic_muscular_ma_55dc639e.jpg";
+import benefitImage4 from "@assets/stock_images/athletic_woman_celeb_2ff7784c.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
