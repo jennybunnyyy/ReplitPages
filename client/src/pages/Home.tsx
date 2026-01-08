@@ -6,6 +6,14 @@ import { Input } from "@/components/ui/input";
 import heroImage from "@assets/generated_images/fit_woman_body_portrait.png";
 import logoImage from "@assets/Copy_of_TBA_LOGO_UPDATE_GOOGLE_(Facebook_Cover)_(1)_1767900892576.png";
 import badgeImage from "@assets/top-rated-med-spa-badge_1767906092825.webp";
+import elleLogoImage from "@assets/elle-logo-1_1767906834373.webp";
+import forbesLogoImage from "@assets/Forbes-logo-1_1767906834372.webp";
+import glamourLogoImage from "@assets/glamour-logo-1_1767906834375.webp";
+import shapeLogoImage from "@assets/shape-logo-1_1767906834374.webp";
+import nytLogoImage from "@assets/the-new-yorks-1_1767906834370.webp";
+import vogueLogoImage from "@assets/vogue-logo-1_1767906834374.webp";
+import womansHealthLogoImage from "@assets/womans-health-1_1767906834374.webp";
+import cosmoLogoImage from "@assets/Cosmopolitan-Logo_1767906834373.webp";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -22,7 +30,14 @@ const stagger = {
 };
 
 const featuredLogos = [
-  "Elle", "Forbes", "Glamour", "Shape", "NY Times", "Vogue", "Women's Health", "Cosmo"
+  { name: "Elle", image: elleLogoImage },
+  { name: "Forbes", image: forbesLogoImage },
+  { name: "Glamour", image: glamourLogoImage },
+  { name: "Shape", image: shapeLogoImage },
+  { name: "NY Times", image: nytLogoImage },
+  { name: "Vogue", image: vogueLogoImage },
+  { name: "Women's Health", image: womansHealthLogoImage },
+  { name: "Cosmopolitan", image: cosmoLogoImage },
 ];
 
 const benefits = [
@@ -221,14 +236,18 @@ export default function Home() {
           <p className="text-sm font-medium text-muted-foreground uppercase tracking-widest">Treatment Featured In</p>
         </div>
         <div className="relative">
-          <div className="flex animate-marquee">
+          <div className="flex animate-marquee items-center">
             {[...featuredLogos, ...featuredLogos, ...featuredLogos].map((logo, index) => (
               <div 
                 key={index} 
-                className="flex-shrink-0 px-12 text-2xl font-display text-muted-foreground/40 font-semibold"
+                className="flex-shrink-0 px-8 md:px-12"
                 data-testid={`logo-featured-${index}`}
               >
-                {logo}
+                <img 
+                  src={logo.image} 
+                  alt={logo.name} 
+                  className="h-8 md:h-10 w-auto opacity-70 hover:opacity-100 transition-opacity"
+                />
               </div>
             ))}
           </div>
