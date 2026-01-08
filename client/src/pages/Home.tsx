@@ -387,7 +387,7 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-20 lg:py-32 bg-white overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-stretch max-w-7xl mx-auto">
             {/* Left - Image */}
             <motion.div
               className="relative order-2 lg:order-1"
@@ -415,22 +415,22 @@ export default function Home() {
                 How It Works
               </motion.h2>
               
-              <div className="flex flex-col justify-between h-full space-y-8">
+              <div className="flex flex-col justify-between h-full gap-6 lg:gap-0">
                 {howItWorks.map((step, index) => (
                   <motion.div
                     key={index}
-                    className="flex gap-6 items-start bg-secondary/50 rounded-2xl p-6 border border-border/30"
+                    className="flex gap-6 items-center bg-secondary/50 rounded-2xl p-5 lg:p-6 border border-border/30"
                     initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.15 }}
                     data-testid={`card-step-${index}`}
                   >
-                    <div className="flex-shrink-0 w-20 h-20 bg-primary rounded-full flex items-center justify-center">
-                      <span className="text-4xl font-display font-semibold text-white">{index + 1}</span>
+                    <div className="flex-shrink-0 w-16 h-16 lg:w-20 lg:h-20 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-3xl lg:text-4xl font-display font-semibold text-white">{index + 1}</span>
                     </div>
-                    <div className="pt-2">
-                      <p className="text-lg text-foreground leading-relaxed">{step.description}</p>
+                    <div>
+                      <p className="text-base lg:text-lg text-foreground leading-relaxed">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}
