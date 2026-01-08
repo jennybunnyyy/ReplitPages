@@ -175,7 +175,7 @@ export default function Home() {
                   data-testid="button-call"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  (310) 510-6649
+                  (310) 670-1920
                 </Button>
               </motion.div>
             </motion.div>
@@ -306,7 +306,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Call Us</p>
-                    <p className="font-semibold text-foreground">(310) 510-6649</p>
+                    <p className="font-semibold text-foreground">(310) 670-1920</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -543,7 +543,7 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-white mb-4">Contact</h4>
               <div className="space-y-2 text-sm">
-                <p>(310) 510-6649</p>
+                <p>(310) 670-1920</p>
                 <p>Westchester, Los Angeles, CA</p>
                 <p>Mon-Sat: 9AM - 6PM</p>
               </div>
