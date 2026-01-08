@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Check, Phone, MapPin, Clock, Flame, Apple, Scale, ChevronRight, Star, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import heroImage from "@assets/generated_images/elegant_woman_beauty_portrait.png";
+import heroImage from "@assets/generated_images/fit_woman_body_portrait.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
