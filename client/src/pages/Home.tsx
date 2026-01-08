@@ -402,13 +402,30 @@ export default function Home() {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto">
-            {/* Left - Steps */}
-            <div className="space-y-6">
+            {/* Left - Image */}
+            <motion.div
+              className="relative order-2 lg:order-1"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl blur-2xl" />
+              <img 
+                src={howItWorksImage} 
+                alt="Weight loss transformation" 
+                className="relative w-full max-w-md mx-auto lg:max-w-full rounded-3xl shadow-2xl"
+                data-testid="img-how-it-works"
+              />
+            </motion.div>
+
+            {/* Right - Steps */}
+            <div className="space-y-6 order-1 lg:order-2">
               {howItWorks.map((step, index) => (
                 <motion.div
                   key={index}
                   className="flex gap-6 items-start"
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.15 }}
@@ -424,23 +441,6 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
-
-            {/* Right - Image */}
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="absolute -inset-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl blur-2xl" />
-              <img 
-                src={howItWorksImage} 
-                alt="Weight loss transformation" 
-                className="relative w-full max-w-md mx-auto lg:max-w-full rounded-3xl shadow-2xl"
-                data-testid="img-how-it-works"
-              />
-            </motion.div>
           </div>
         </div>
       </section>
