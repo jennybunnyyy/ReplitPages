@@ -14,6 +14,9 @@ import nytLogoImage from "@assets/the-new-yorks-1_1767906834370.webp";
 import vogueLogoImage from "@assets/vogue-logo-1_1767906834374.webp";
 import womansHealthLogoImage from "@assets/womans-health-1_1767906834374.webp";
 import cosmoLogoImage from "@assets/Cosmopolitan-Logo_1767906834373.webp";
+import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-fat_1767907312171.webp";
+import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
+import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -68,17 +71,17 @@ const howItWorks = [
 
 const treatmentBenefits = [
   {
-    icon: Flame,
+    image: burnFatIcon,
     title: "Burn Body Fat",
     description: "Increases the body's ability to burn fat efficiently"
   },
   {
-    icon: Apple,
+    image: curbAppetiteIcon,
     title: "Curb Appetite",
     description: "Suppresses appetite so you don't get hunger pangs"
   },
   {
-    icon: Scale,
+    image: shedPoundsIcon,
     title: "Shed Pounds",
     description: "Decreases food intake and reduces body fat mass"
   }
@@ -296,9 +299,11 @@ export default function Home() {
                     className="text-center p-4 rounded-2xl bg-white shadow-md border border-border/50"
                     data-testid={`card-benefit-${index}`}
                   >
-                    <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl flex items-center justify-center">
-                      <benefit.icon className="w-6 h-6 text-primary" />
-                    </div>
+                    <img 
+                      src={benefit.image} 
+                      alt={benefit.title} 
+                      className="w-16 h-16 mx-auto mb-3"
+                    />
                     <h4 className="font-display text-sm font-semibold">{benefit.title}</h4>
                   </div>
                 ))}
