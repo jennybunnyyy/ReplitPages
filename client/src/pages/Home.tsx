@@ -572,18 +572,20 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 data-testid={`card-benefit-${index}`}
               >
-                {/* Image fills entire card */}
-                <div className="absolute inset-0">
+                {/* Text sits in its own area at top — card bg color behind it, no extra box */}
+                <div className="px-5 pt-7 pb-4 shrink-0">
+                  <p className="text-white text-base font-bold leading-snug text-center">
+                    {benefit.text}
+                  </p>
+                </div>
+                {/* Image fills the bottom portion */}
+                <div className="flex-1 relative overflow-hidden">
                   <img
                     src={benefit.image}
                     alt="Weight loss benefit"
-                    className="w-full h-full object-cover object-top"
+                    className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 </div>
-                {/* Text overlaid on top of image */}
-                <p className="relative z-10 text-white text-sm font-bold leading-snug text-center px-5 pt-6">
-                  {benefit.text}
-                </p>
               </motion.div>
             ))}
           </div>
