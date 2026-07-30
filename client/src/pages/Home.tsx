@@ -22,6 +22,13 @@ import benefitImage1 from "@assets/generated_images/athletic_woman_pink_backgrou
 import benefitImage2 from "@assets/generated_images/athletic_couple_pink_background.png";
 import benefitImage3 from "@assets/generated_images/athletic_man_pink_background.png";
 import benefitImage4 from "@assets/generated_images/woman_victory_pose_pink.png";
+import beforeAfter1 from "@assets/image_1785451088432.png";
+import beforeAfter2 from "@assets/image_1785451094720.png";
+import beforeAfter3 from "@assets/image_1785451102694.png";
+import beforeAfter4 from "@assets/image_1785451116078.png";
+import beforeAfter5 from "@assets/image_1785451121718.png";
+import beforeAfter6 from "@assets/image_1785451127157.png";
+import beforeAfter7 from "@assets/image_1785451131857.png";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -555,109 +562,119 @@ export default function Home() {
       </section>
 
       {/* Discover If Our Weight Loss Medication is Right For You — Quiz */}
-      <section className="py-20 lg:py-32 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="bg-[#F9F0EE] overflow-hidden">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-[520px]">
+          {/* Left — image fills the column */}
+          <div className="hidden lg:block relative">
+            <img
+              src={heroImage}
+              alt="Weight loss candidate"
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          </div>
+
+          {/* Right — quiz content */}
           <motion.div
-            className="max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            className="flex flex-col justify-center px-10 py-16 lg:px-16"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            <h2 className="font-display text-3xl md:text-4xl font-semibold mb-4 text-center">
-              Discover If Our Weight Loss{" "}
-              <span className="text-gradient">Medication</span> is Right For You
-            </h2>
-            <p className="text-center text-muted-foreground mb-10">Answer a few quick questions to find out if you're a candidate.</p>
+            {!quizCompleted ? (
+              quizStep < quizQuestions.length ? (
+                <>
+                  <h2 className="font-display text-2xl md:text-3xl font-semibold mb-8 text-primary leading-snug text-center">
+                    Discover If Our Weight Loss<br />Medication is Right For You
+                  </h2>
 
-            <div className="bg-white rounded-3xl shadow-xl border border-border/50 p-8">
-              {!quizCompleted ? (
-                quizStep < quizQuestions.length ? (
-                  <>
-                    {/* Progress bar */}
-                    <div className="mb-6">
-                      <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                        <span>Question {quizStep + 1} of {quizQuestions.length}</span>
-                        <span>{Math.round(((quizStep) / quizQuestions.length) * 100)}% complete</span>
-                      </div>
-                      <div className="h-2 bg-secondary rounded-full">
-                        <div
-                          className="h-2 bg-primary rounded-full transition-all duration-300"
-                          style={{ width: `${(quizStep / quizQuestions.length) * 100}%` }}
-                        />
-                      </div>
-                    </div>
+                  <p className="text-foreground font-medium mb-4">
+                    {quizQuestions[quizStep].question} <span className="text-primary">*</span>
+                  </p>
 
-                    <h3 className="font-display text-xl font-semibold mb-6 text-center">
-                      {quizQuestions[quizStep].question}
-                    </h3>
-                    <div className="grid gap-3">
-                      {quizQuestions[quizStep].options.map((option) => (
-                        <button
-                          key={option}
-                          onClick={() => handleQuizAnswer(option)}
-                          className="w-full py-4 px-6 text-left rounded-xl border-2 border-border/50 hover:border-primary hover:bg-primary/5 transition-all font-medium text-foreground"
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-
-                    {quizStep > 0 && (
-                      <button
-                        onClick={() => setQuizStep(quizStep - 1)}
-                        className="mt-4 flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  <div className="space-y-3 mb-8">
+                    {quizQuestions[quizStep].options.map((option) => (
+                      <label
+                        key={option}
+                        className="flex items-center gap-3 cursor-pointer group"
                       >
-                        <ChevronLeft className="w-4 h-4" /> Back
-                      </button>
-                    )}
-                  </>
-                ) : (
-                  /* Contact step */
-                  <form onSubmit={handleQuizSubmit}>
-                    <div className="mb-6">
-                      <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                        <span>Almost done!</span>
-                        <span>100% complete</span>
-                      </div>
-                      <div className="h-2 bg-secondary rounded-full">
-                        <div className="h-2 bg-primary rounded-full w-full transition-all duration-300" />
-                      </div>
-                    </div>
+                        <input
+                          type="radio"
+                          name={`q-${quizStep}`}
+                          value={option}
+                          checked={quizAnswers[quizStep] === option}
+                          onChange={() => {
+                            const newAnswers = [...quizAnswers];
+                            newAnswers[quizStep] = option;
+                            setQuizAnswers(newAnswers);
+                          }}
+                          className="w-4 h-4 accent-primary cursor-pointer"
+                        />
+                        <span className="text-foreground group-hover:text-primary transition-colors">{option}</span>
+                      </label>
+                    ))}
+                  </div>
 
-                    <h3 className="font-display text-xl font-semibold mb-6 text-center">
-                      You may be a great candidate! Enter your info to get started.
-                    </h3>
-                    <div className="space-y-4">
-                      <Input
-                        type="text"
-                        placeholder="Full Name *"
-                        value={quizContactData.name}
-                        onChange={(e) => setQuizContactData({ ...quizContactData, name: e.target.value })}
-                        className="py-6 px-4 rounded-xl"
-                        required
-                      />
-                      <Input
-                        type="tel"
-                        placeholder="Phone *"
-                        value={quizContactData.phone}
-                        onChange={(e) => setQuizContactData({ ...quizContactData, phone: e.target.value })}
-                        className="py-6 px-4 rounded-xl"
-                        required
-                      />
-                      <Input
-                        type="email"
-                        placeholder="Email *"
-                        value={quizContactData.email}
-                        onChange={(e) => setQuizContactData({ ...quizContactData, email: e.target.value })}
-                        className="py-6 px-4 rounded-xl"
-                        required
-                      />
-                      <Button type="submit" className="w-full py-6 text-lg rounded-xl bg-primary hover:bg-primary/90">
-                        NEXT
-                        <ChevronRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </div>
-                  </form>
+                  <button
+                    onClick={() => {
+                      if (quizAnswers[quizStep]) setQuizStep(quizStep + 1);
+                    }}
+                    className="flex items-center justify-between w-full bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded transition-colors"
+                  >
+                    <span className="font-medium">{quizStep + 1} of {quizQuestions.length + 1}</span>
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+
+                  {quizStep > 0 && (
+                    <button
+                      onClick={() => setQuizStep(quizStep - 1)}
+                      className="mt-3 flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    >
+                      <ChevronLeft className="w-4 h-4" /> Back
+                    </button>
+                  )}
+                </>
+              ) : (
+                /* Contact step */
+                <form onSubmit={handleQuizSubmit}>
+                  <h2 className="font-display text-2xl md:text-3xl font-semibold mb-3 text-primary text-center">
+                    You may be a great candidate!
+                  </h2>
+                  <p className="text-muted-foreground text-center mb-8">Enter your info to get started.</p>
+                  <div className="space-y-4">
+                    <Input
+                      type="text"
+                      placeholder="Full Name *"
+                      value={quizContactData.name}
+                      onChange={(e) => setQuizContactData({ ...quizContactData, name: e.target.value })}
+                      className="py-6 px-4 rounded-xl bg-white"
+                      required
+                    />
+                    <Input
+                      type="tel"
+                      placeholder="Phone *"
+                      value={quizContactData.phone}
+                      onChange={(e) => setQuizContactData({ ...quizContactData, phone: e.target.value })}
+                      className="py-6 px-4 rounded-xl bg-white"
+                      required
+                    />
+                    <Input
+                      type="email"
+                      placeholder="Email *"
+                      value={quizContactData.email}
+                      onChange={(e) => setQuizContactData({ ...quizContactData, email: e.target.value })}
+                      className="py-6 px-4 rounded-xl bg-white"
+                      required
+                    />
+                    <button
+                      type="submit"
+                      className="flex items-center justify-between w-full bg-primary hover:bg-primary/90 text-white px-6 py-4 rounded transition-colors"
+                    >
+                      <span className="font-medium">{quizQuestions.length + 1} of {quizQuestions.length + 1}</span>
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+                </form>
                 )
               ) : (
                 <div className="text-center py-8">
@@ -674,7 +691,6 @@ export default function Home() {
                   </a>
                 </div>
               )}
-            </div>
           </motion.div>
         </div>
       </section>
@@ -698,11 +714,11 @@ export default function Home() {
           </motion.div>
 
           {/* Before & After Gallery */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {[benefitImage1, benefitImage2, benefitImage3, benefitImage4, benefitImage1, benefitImage2].map((img, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {[beforeAfter1, beforeAfter2, beforeAfter3, beforeAfter4, beforeAfter5, beforeAfter6, beforeAfter7].map((img, index) => (
               <motion.div
                 key={index}
-                className="rounded-2xl overflow-hidden bg-secondary aspect-[3/4]"
+                className="rounded-2xl overflow-hidden bg-secondary aspect-square"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -711,7 +727,7 @@ export default function Home() {
                 <img
                   src={img}
                   alt={`Weight loss transformation ${index + 1}`}
-                  className="w-full h-full object-cover object-top"
+                  className="w-full h-full object-cover"
                 />
               </motion.div>
             ))}
