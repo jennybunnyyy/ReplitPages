@@ -238,9 +238,9 @@ export default function Home() {
                   data-testid="button-call"
                   asChild
                 >
-                  <a href="tel:+13105106649">
+                  <a href="tel:+13106701920">
                     <Phone className="w-5 h-5 mr-2" />
-                    (310) 510-6649
+                    (310) 670-1920
                   </a>
                 </Button>
               </motion.div>
@@ -328,7 +328,7 @@ export default function Home() {
               </p>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 At Total Body Aesthetic in Los Angeles, CA, our team reviews your health history and goals during a consultation to discuss whether treatment may be appropriate for you. To learn more or schedule an appointment, call{" "}
-                <a href="tel:+13105106649" className="text-primary font-semibold hover:underline">(310) 510-6649</a>{" "}
+                <a href="tel:+13106701920" className="text-primary font-semibold hover:underline">(310) 670-1920</a>{" "}
                 for an in-person or telehealth consultation.
               </p>
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
@@ -374,7 +374,7 @@ export default function Home() {
                   <h3 className="font-display text-3xl font-semibold">Get $50 Off</h3>
                   <p className="text-foreground/70 text-sm mt-1">Weight Loss</p>
                   <p className="text-primary font-semibold mt-2">
-                    <a href="tel:+13105106649">(310) 510-6649</a>
+                    <a href="tel:+13106701920">(310) 670-1920</a>
                   </p>
                 </div>
                 
@@ -666,10 +666,10 @@ export default function Home() {
                   </div>
                   <h3 className="font-display text-2xl font-semibold mb-2">Thank You!</h3>
                   <p className="text-muted-foreground mb-6">Our team will reach out to you shortly to discuss your weight loss journey.</p>
-                  <a href="tel:+13105106649">
+                  <a href="tel:+13106701920">
                     <Button className="bg-primary hover:bg-primary/90 rounded-full px-8">
                       <Phone className="w-4 h-4 mr-2" />
-                      Call (310) 510-6649
+                      Call (310) 670-1920
                     </Button>
                   </a>
                 </div>
@@ -844,7 +844,7 @@ export default function Home() {
             <h3 className="font-display text-2xl font-semibold mb-4">Weight Loss Injections in Los Angeles, CA</h3>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               Weight loss injections may be an option for some adults as part of a medically supervised weight management plan. At Total Body Aesthetic, our providers create individualized plans based on each patient's health and goals. To find out whether treatment may be right for you, call{" "}
-              <a href="tel:+13105106649" className="text-primary font-semibold hover:underline">(310) 510-6649</a>{" "}
+              <a href="tel:+13106701920" className="text-primary font-semibold hover:underline">(310) 670-1920</a>{" "}
               to schedule a medical consultation.
             </p>
             <Button
@@ -924,14 +924,14 @@ export default function Home() {
                 Get $50 off — Weight Loss new client special.
               </p>
               <div className="flex flex-wrap gap-4">
-                <a href="tel:+13105106649">
+                <a href="tel:+13106701920">
                   <Button 
                     size="lg"
                     className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg rounded-full shadow-lg"
                     data-testid="button-call-bottom"
                   >
                     <Phone className="w-5 h-5 mr-2" />
-                    (310) 510-6649
+                    (310) 670-1920
                   </Button>
                 </a>
                 <Button 
@@ -1027,7 +1027,7 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-white mb-4">Contact</h4>
               <div className="space-y-2 text-sm">
-                <p><a href="tel:+13105106649" className="hover:text-white transition-colors">(310) 510-6649</a></p>
+                <p><a href="tel:+13106701920" className="hover:text-white transition-colors">(310) 670-1920</a></p>
                 <p>8610 S Sepulveda Blvd #100, Los Angeles, CA 90045</p>
                 <p>Westchester, Los Angeles, CA</p>
               </div>
