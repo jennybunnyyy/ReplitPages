@@ -572,6 +572,12 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 data-testid={`card-benefit-${index}`}
               >
+                {/* Text — no box, just floats on top */}
+                <div className="px-5 pt-6 pb-3 z-10">
+                  <p className="text-white text-sm font-bold leading-snug text-center">
+                    {benefit.text}
+                  </p>
+                </div>
                 {/* Image fills the rest */}
                 <div className="flex-1 relative overflow-hidden">
                   <img
