@@ -314,9 +314,9 @@ export default function Home() {
       </section>
 
       {/* Medical Weight Management Section */}
-      <section className="py-20 lg:py-32 bg-[#FBF0EE]">
+      <section className="py-20 lg:py-32 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start max-w-7xl mx-auto">
             {/* Left - Content */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -324,39 +324,37 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-4">
-                Medical Weight Management in{" "}
-                <span className="text-gradient">Los Angeles, CA</span>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-primary leading-tight">
+                Medical Weight Management in Los Angeles, CA
               </h2>
-              <h3 className="font-display text-xl font-medium text-muted-foreground mb-6">
+              <p className="text-base text-muted-foreground mb-5 leading-relaxed italic">
                 Physician-supervised care tailored to your health and your goals.
-              </h3>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+              </p>
+              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                 Weight loss injections are one tool a provider may use as part of a medical weight management plan that also includes nutrition and lifestyle guidance. Used under medical supervision, they may help support appetite management while your provider monitors your progress over time.
               </p>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+              <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
                 At Total Body Aesthetic in Los Angeles, CA, our team reviews your health history and goals during a consultation to discuss whether treatment may be appropriate for you. To learn more or schedule an appointment, call{" "}
                 <a href="tel:+13106701920" className="text-primary font-semibold hover:underline">(310) 670-1920</a>{" "}
                 for an in-person or telehealth consultation.
               </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                You will need to make consistent visits as part of your treatment plan so your provider can monitor your progress. Treatment may be administered in-office, or your provider may discuss take-home options if you and your Total Body Aesthetic provider decide that is right for you.
-              </p>
 
-              {/* Benefit Icons */}
-              <div className="grid grid-cols-3 gap-6 w-full">
+              {/* Benefit Icons — plain circles, no card */}
+              <div className="grid grid-cols-3 gap-4">
                 {treatmentBenefits.map((benefit, index) => (
                   <div
                     key={index}
-                    className="text-center py-8 px-4 rounded-3xl bg-white shadow-md border border-border/50"
+                    className="text-center"
                     data-testid={`card-benefit-icon-${index}`}
                   >
-                    <img 
-                      src={benefit.image} 
-                      alt={benefit.title} 
-                      className="w-28 h-28 mx-auto mb-4"
-                    />
-                    <h4 className="font-display text-lg font-semibold">{benefit.title}</h4>
+                    <div className="w-20 h-20 rounded-full bg-[#F5E8E4] flex items-center justify-center mx-auto mb-3">
+                      <img 
+                        src={benefit.image} 
+                        alt={benefit.title} 
+                        className="w-10 h-10"
+                      />
+                    </div>
+                    <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground">{benefit.title}</p>
                   </div>
                 ))}
               </div>
@@ -372,67 +370,58 @@ export default function Home() {
             >
               <form 
                 onSubmit={handleSubmit}
-                className="bg-white rounded-3xl shadow-xl p-8 border border-border/50"
+                className="rounded-3xl p-8"
+                style={{ background: "#F5E0DA" }}
                 data-testid="form-lead"
               >
-                <div className="text-center mb-6">
-                  <div className="inline-block px-4 py-2 bg-primary text-white rounded-full text-sm font-semibold mb-3">
-                    NEW CLIENT SPECIAL
-                  </div>
-                  <h3 className="font-display text-3xl font-semibold">Get $50 Off</h3>
-                  <p className="text-foreground/70 text-sm mt-1">Weight Loss</p>
-                  <p className="text-primary font-semibold mt-2">
-                    <a href="tel:+13106701920">(310) 670-1920</a>
-                  </p>
+                <div className="mb-6">
+                  <h3 className="font-display text-5xl font-bold leading-none mb-1" style={{ color: "#6B3A32" }}>
+                    GET $50 OFF
+                  </h3>
+                  <p className="font-semibold tracking-widest uppercase text-sm mb-1" style={{ color: "#6B3A32" }}>Weight Loss</p>
+                  <p className="text-xs tracking-widest uppercase text-muted-foreground mb-3">New Client Special</p>
+                  <a href="tel:+13106701920" className="text-primary font-semibold text-sm hover:underline">(310) 670-1920</a>
                 </div>
                 
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Full Name</label>
-                    <Input 
-                      type="text"
-                      placeholder="Enter your full name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full py-6 px-4 rounded-xl"
-                      data-testid="input-name"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Email</label>
-                    <Input 
-                      type="email"
-                      placeholder="Enter your email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full py-6 px-4 rounded-xl"
-                      data-testid="input-email"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Phone</label>
-                    <Input 
-                      type="tel"
-                      placeholder="(999) 999-9999"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full py-6 px-4 rounded-xl"
-                      data-testid="input-phone"
-                      required
-                    />
-                  </div>
+                <div className="space-y-3">
+                  <Input 
+                    type="text"
+                    placeholder="Name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full py-5 px-4 rounded-lg bg-white border-0 shadow-none"
+                    data-testid="input-name"
+                    required
+                  />
+                  <Input 
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full py-5 px-4 rounded-lg bg-white border-0 shadow-none"
+                    data-testid="input-email"
+                    required
+                  />
+                  <Input 
+                    type="tel"
+                    placeholder="Phone - (999) 999 9999"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full py-5 px-4 rounded-lg bg-white border-0 shadow-none"
+                    data-testid="input-phone"
+                    required
+                  />
                   
-                  <Button 
+                  <button
                     type="submit"
-                    className="w-full py-6 text-lg rounded-xl bg-primary hover:bg-primary/90"
+                    className="w-full py-4 text-sm font-bold tracking-widest uppercase text-white rounded-lg"
+                    style={{ background: "#4A2E28" }}
                     data-testid="button-submit"
                   >
-                    Get $50 Off Now
-                  </Button>
+                    Get Coupon
+                  </button>
                   
-                  <p className="text-xs text-muted-foreground text-center mt-4 leading-relaxed">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     *By submitting this form, I consent to be contacted by Total Body Aesthetic via phone, text, email, or mail. Message and data rates may apply. Consent is not a condition of purchase. I agree to the <a href="#" className="underline">Terms of Service</a> and acknowledge the <a href="#" className="underline">Privacy Policy</a>. Reply STOP to opt out.
                   </p>
                 </div>
