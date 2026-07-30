@@ -592,7 +592,7 @@ export default function Home() {
 
       {/* Discover If Our Weight Loss Medication is Right For You — Quiz */}
       <section className="py-12 lg:py-16 overflow-hidden" style={{ background: "linear-gradient(135deg, #C9908A 0%, #D4A8A4 40%, #E8C4C0 100%)" }}>
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-center">
+        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-stretch">
 
           {/* Left — image card */}
           <motion.div
