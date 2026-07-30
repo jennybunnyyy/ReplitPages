@@ -18,6 +18,7 @@ import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-
 import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
 import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
 import howItWorksImage from "@assets/generated_images/woman_stretching_slim.png";
+import understandingImage from "@assets/generated_images/woman_confidence_pose.png";
 import benefitImage1 from "@assets/generated_images/athletic_woman_pink_background.png";
 import benefitImage2 from "@assets/generated_images/athletic_couple_pink_background.png";
 import benefitImage3 from "@assets/generated_images/athletic_man_pink_background.png";
@@ -109,7 +110,7 @@ const testimonials = [
   {
     name: "Jennifer K.",
     location: "Beverly Hills, CA",
-    quote: "Finally found something that works. The team at Total Body Aesthetics is amazing!",
+    quote: "Finally found something that works. The team at Total Body Aesthetic is amazing!",
     rating: 5
   },
   {
@@ -178,7 +179,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <img 
             src={logoImage} 
-            alt="Total Body Aesthetics" 
+            alt="Total Body Aesthetic" 
             className="h-16 md:h-20 w-auto"
             data-testid="img-logo-header"
           />
@@ -510,7 +511,7 @@ export default function Home() {
               transition={{ duration: 0.6 }}
             >
               <img
-                src={howItWorksImage}
+                src={understandingImage}
                 alt="Understanding weight loss injections"
                 className="w-full max-w-md mx-auto lg:max-w-full rounded-2xl opacity-90"
               />
@@ -582,12 +583,6 @@ export default function Home() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 data-testid={`card-benefit-${index}`}
               >
-                {/* Text at top */}
-                <div className="px-5 pt-6 pb-3 z-10">
-                  <p className="text-white text-sm font-bold leading-snug text-center">
-                    {benefit.text}
-                  </p>
-                </div>
                 {/* Image fills the rest */}
                 <div className="flex-1 relative overflow-hidden">
                   <img
@@ -625,7 +620,8 @@ export default function Home() {
 
           {/* Right — quiz card */}
           <motion.div
-            className="bg-white rounded-2xl shadow-xl p-8 lg:p-10"
+            className="bg-white rounded-2xl shadow-xl p-8 lg:p-10 flex flex-col justify-center"
+            style={{ minHeight: "500px" }}
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -1204,7 +1200,7 @@ export default function Home() {
                 Ready to Start Your Transformation?
               </h2>
               <p className="text-xl text-white/90 mb-6">
-                Join thousands of satisfied patients who have achieved their weight loss goals with Total Body Aesthetics.
+                Join thousands of satisfied patients who have achieved their weight loss goals with Total Body Aesthetic.
               </p>
               <p className="text-lg text-white/80 mb-8">
                 Get $50 off — Weight Loss new client special.
@@ -1302,7 +1298,7 @@ export default function Home() {
             <div>
               <img 
                 src={logoImage} 
-                alt="Total Body Aesthetics" 
+                alt="Total Body Aesthetic" 
                 className="h-14 w-auto mb-4 brightness-0 invert opacity-90"
                 data-testid="img-logo-footer"
               />
@@ -1327,7 +1323,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-sm">
-            <p>&copy; {new Date().getFullYear()} Total Body Aesthetics. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Total Body Aesthetic. All rights reserved.</p>
             <p className="mt-2 text-xs text-white/50">*Results may vary. Individual results are not guaranteed.</p>
           </div>
         </div>
