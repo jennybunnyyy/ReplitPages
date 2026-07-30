@@ -17,7 +17,7 @@ import cosmoLogoImage from "@assets/Cosmopolitan-Logo_1767906834373.webp";
 import burnFatIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-burn-fat_1767907312171.webp";
 import curbAppetiteIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-curb-appetite_1767907312172.webp";
 import shedPoundsIcon from "@assets/total-body-aesthetics-los-angeles-ca-icon-shed-pounds_1767907312173.webp";
-import howItWorksImage from "@assets/generated_images/elegant_woman_black_outfit.png";
+import howItWorksImage from "@assets/generated_images/woman_stretching_slim.png";
 import benefitImage1 from "@assets/generated_images/athletic_woman_pink_background.png";
 import benefitImage2 from "@assets/generated_images/athletic_couple_pink_background.png";
 import benefitImage3 from "@assets/generated_images/athletic_man_pink_background.png";
@@ -313,7 +313,7 @@ export default function Home() {
       </section>
 
       {/* Medical Weight Management Section */}
-      <section className="py-20 lg:py-32 bg-background">
+      <section className="py-20 lg:py-32 bg-[#FBF0EE]">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-start max-w-7xl mx-auto">
             {/* Left - Content */}
@@ -343,19 +343,19 @@ export default function Home() {
               </p>
 
               {/* Benefit Icons */}
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-6 w-full">
                 {treatmentBenefits.map((benefit, index) => (
                   <div
                     key={index}
-                    className="text-center p-4 rounded-2xl bg-white shadow-md border border-border/50"
+                    className="text-center py-8 px-4 rounded-3xl bg-white shadow-md border border-border/50"
                     data-testid={`card-benefit-icon-${index}`}
                   >
                     <img 
                       src={benefit.image} 
                       alt={benefit.title} 
-                      className="w-16 h-16 mx-auto mb-3"
+                      className="w-28 h-28 mx-auto mb-4"
                     />
-                    <h4 className="font-display text-sm font-semibold">{benefit.title}</h4>
+                    <h4 className="font-display text-lg font-semibold">{benefit.title}</h4>
                   </div>
                 ))}
               </div>
@@ -444,10 +444,10 @@ export default function Home() {
       {/* How It Works */}
       <section className="py-20 lg:py-32 bg-gradient-to-b from-white to-[#F5F0E8] overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-stretch max-w-7xl mx-auto">
             {/* Left - Image */}
             <motion.div
-              className="relative order-2 lg:order-1"
+              className="relative order-2 lg:order-1 rounded-3xl overflow-hidden min-h-[480px]"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -456,7 +456,7 @@ export default function Home() {
               <img 
                 src={howItWorksImage} 
                 alt="Weight loss transformation" 
-                className="relative w-full max-w-md mx-auto lg:max-w-full"
+                className="absolute inset-0 w-full h-full object-cover object-top"
                 data-testid="img-how-it-works"
               />
             </motion.div>
@@ -497,61 +497,102 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Weight Loss Injection Benefits */}
-      <section className="py-20 lg:py-28 bg-[#F5F0E8]">
+      {/* Understanding Weight Loss Injections */}
+      <section className="py-20 lg:py-28 overflow-hidden" style={{ background: "#3D2318" }}>
         <div className="container mx-auto px-4">
-          <motion.h2 
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 text-center text-foreground tracking-wide"
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center max-w-7xl mx-auto">
+            {/* Left — image */}
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <img
+                src={howItWorksImage}
+                alt="Understanding weight loss injections"
+                className="w-full max-w-md mx-auto lg:max-w-full rounded-2xl opacity-90"
+              />
+            </motion.div>
+
+            {/* Right — text */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="font-display text-4xl md:text-5xl font-semibold mb-8 leading-tight" style={{ color: "#F0D5CC" }}>
+                Understanding Weight Loss Injections
+              </h2>
+              <div className="space-y-6 text-lg leading-relaxed" style={{ color: "rgba(240,213,204,0.8)" }}>
+                <p>
+                  Weight loss injections are used by some adults as part of a medically supervised plan to manage their weight. They work with the body's natural signals that help regulate appetite and food intake, which is why they are used alongside nutrition and lifestyle guidance rather than on their own.
+                </p>
+                <p>
+                  When starting treatment, your provider will typically begin with a low dose and may adjust it gradually over time based on how you respond. Results vary from person to person and are not guaranteed, so it is important to have realistic expectations and stay consistent with your plan. This is not a quick fix, and the best outcomes come from an ongoing commitment to your provider's recommendations.
+                </p>
+                <p>
+                  You will need to make consistent visits as part of your treatment plan so your provider can monitor your progress. Treatment may be administered in-office, or your provider may discuss take-home options if you and your Total Body Aesthetic provider decide that is right for you.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Weight Loss Injection Benefits */}
+      <section className="py-20 lg:py-28" style={{ background: "#F5E8E4" }}>
+        <div className="container mx-auto px-4">
+          <motion.h2
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-5 text-center"
+            style={{ color: "#6B3A32" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            WEIGHT LOSS INJECTION BENEFITS
+            Weight Loss Injection Benefits
           </motion.h2>
-          
-          <motion.div 
-            className="max-w-5xl mx-auto mb-12 space-y-6 text-foreground"
+
+          <motion.p
+            className="max-w-4xl mx-auto mb-10 text-sm text-muted-foreground leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <p className="text-base lg:text-lg leading-relaxed">
-              Weight loss injections work with your body's natural appetite signals. In a medically supervised program, they may be used to support appetite management as part of a broader plan. Individual responses vary, and a provider will discuss potential benefits, risks, and side effects with you during your consultation. Any treatment decision should be made with a qualified healthcare provider based on your individual health.
-            </p>
-            <p className="text-base lg:text-lg leading-relaxed">
-              When considering a weight loss plan, people want to know the benefits and drawbacks of phentermine vs. GLP-1 weight loss injections. Phentermine is a widely-used diet pill and appetite suppressant that is more affordable than weight loss shots. But there's a catch—it's only approved for short-term use. On the other hand, GLP-1 is a suitable option for those seeking a long-term weight loss solution. Not only does it help with weight management, but it also treats Type-2 diabetes and improves glycemic control.
-            </p>
-            <p className="text-base lg:text-lg leading-relaxed">
-              GLP-1 offers a plethora of benefits. You only need one injection per week to experience reduced appetite, increased metabolism, and quicker weight loss. Men and women turn to this revolutionary treatment because:
-            </p>
-          </motion.div>
+            Weight loss injections work with your body's natural appetite signals. In a medically supervised program, they may be used to support appetite management as part of a broader plan. Individual responses vary, and a provider will discuss potential benefits, risks, and side effects with you during your consultation. Any treatment decision should be made with a qualified healthcare provider based on your individual health.
+          </motion.p>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {[
-              { text: "Increases the body's ability to burn fat.", bg: "bg-[#DCAFAB]", image: benefitImage1 },
-              { text: "It suppresses your appetite, so you don't get hunger pangs as often.", bg: "bg-[#F5DDD8]", image: benefitImage2 },
-              { text: "It decreases your food intake and, as a result, reduces your body's fat mass.", bg: "bg-[#DCAFAB]", image: benefitImage3 },
-              { text: "It's a reliable long-term weight management option.", bg: "bg-[#F5DDD8]", image: benefitImage4 }
+              { text: "Increases the body's ability to burn fat.", bg: "#C4A09C", image: benefitImage1 },
+              { text: "It suppresses your appetite, so you don't get hunger pangs as often.", bg: "#E8D0C8", image: benefitImage2 },
+              { text: "It decreases your food intake and, as a result, reduces your body's fat mass.", bg: "#7A4A40", image: benefitImage3 },
+              { text: "It's a reliable long-term weight management option.", bg: "#C4A09C", image: benefitImage4 }
             ].map((benefit, index) => (
               <motion.div
                 key={index}
-                className={`relative h-80 lg:h-[420px] ${benefit.bg} rounded-2xl overflow-hidden flex flex-col`}
+                className="relative h-[380px] lg:h-[460px] rounded-3xl overflow-hidden flex flex-col"
+                style={{ backgroundColor: benefit.bg }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 data-testid={`card-benefit-${index}`}
               >
-                <div className="pt-5 px-4 pb-3">
-                  <p className="text-center text-sm lg:text-base font-medium text-foreground leading-relaxed">
+                {/* Text at top */}
+                <div className="px-5 pt-6 pb-3 z-10">
+                  <p className="text-white text-sm font-bold leading-snug text-center">
                     {benefit.text}
                   </p>
                 </div>
+                {/* Image fills the rest */}
                 <div className="flex-1 relative overflow-hidden">
-                  <img 
-                    src={benefit.image} 
-                    alt="Weight loss benefit" 
+                  <img
+                    src={benefit.image}
+                    alt="Weight loss benefit"
                     className="absolute inset-0 w-full h-full object-cover object-top"
                   />
                 </div>
@@ -562,20 +603,29 @@ export default function Home() {
       </section>
 
       {/* Discover If Our Weight Loss Medication is Right For You — Quiz */}
-      <section className="bg-[#F9F0EE] overflow-hidden">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 min-h-[520px]">
-          {/* Left — image fills the column */}
-          <div className="hidden lg:block relative">
+      <section className="py-12 lg:py-16 overflow-hidden" style={{ background: "linear-gradient(135deg, #C9908A 0%, #D4A8A4 40%, #E8C4C0 100%)" }}>
+        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-8 items-center">
+
+          {/* Left — image card */}
+          <motion.div
+            className="hidden lg:block rounded-2xl overflow-hidden shadow-xl"
+            style={{ minHeight: "500px" }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <img
               src={heroImage}
               alt="Weight loss candidate"
-              className="absolute inset-0 w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-top"
+              style={{ minHeight: "500px" }}
             />
-          </div>
+          </motion.div>
 
-          {/* Right — quiz content */}
+          {/* Right — quiz card */}
           <motion.div
-            className="flex flex-col justify-center px-10 py-16 lg:px-16"
+            className="bg-white rounded-2xl shadow-xl p-8 lg:p-10"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -647,7 +697,7 @@ export default function Home() {
                       placeholder="Full Name *"
                       value={quizContactData.name}
                       onChange={(e) => setQuizContactData({ ...quizContactData, name: e.target.value })}
-                      className="py-6 px-4 rounded-xl bg-white"
+                      className="py-6 px-4 rounded-xl"
                       required
                     />
                     <Input
@@ -655,7 +705,7 @@ export default function Home() {
                       placeholder="Phone *"
                       value={quizContactData.phone}
                       onChange={(e) => setQuizContactData({ ...quizContactData, phone: e.target.value })}
-                      className="py-6 px-4 rounded-xl bg-white"
+                      className="py-6 px-4 rounded-xl"
                       required
                     />
                     <Input
@@ -663,7 +713,7 @@ export default function Home() {
                       placeholder="Email *"
                       value={quizContactData.email}
                       onChange={(e) => setQuizContactData({ ...quizContactData, email: e.target.value })}
-                      className="py-6 px-4 rounded-xl bg-white"
+                      className="py-6 px-4 rounded-xl"
                       required
                     />
                     <button
@@ -675,28 +725,187 @@ export default function Home() {
                     </button>
                   </div>
                 </form>
-                )
-              ) : (
-                <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Check className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="font-display text-2xl font-semibold mb-2">Thank You!</h3>
-                  <p className="text-muted-foreground mb-6">Our team will reach out to you shortly to discuss your weight loss journey.</p>
-                  <a href="tel:+13106701920">
-                    <Button className="bg-primary hover:bg-primary/90 rounded-full px-8">
-                      <Phone className="w-4 h-4 mr-2" />
-                      Call (310) 670-1920
-                    </Button>
-                  </a>
+              )
+            ) : (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Check className="w-8 h-8 text-primary" />
                 </div>
-              )}
+                <h3 className="font-display text-2xl font-semibold mb-2">Thank You!</h3>
+                <p className="text-muted-foreground mb-6">Our team will reach out to you shortly to discuss your weight loss journey.</p>
+                <a href="tel:+13106701920">
+                  <Button className="bg-primary hover:bg-primary/90 rounded-full px-8">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call (310) 670-1920
+                  </Button>
+                </a>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
 
+      {/* Metabolic Reset Program */}
+      <section className="py-20 lg:py-28 bg-[#FBF0EE]">
+        <div className="container mx-auto px-4">
+
+          {/* Header */}
+          <motion.div
+            className="text-center max-w-4xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm font-semibold tracking-widest uppercase text-primary mb-3">Comprehensive Medical Weight Loss</p>
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold mb-6 text-foreground leading-tight">
+              The Metabolic Reset<br />
+              <span className="text-primary">Weight Loss Program</span>
+            </h2>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              A comprehensive 7-modality protocol designed to address every root cause of stubborn weight — simultaneously. Stubborn weight is rarely just about willpower. It's a complex interplay of metabolic dysfunction, hormonal imbalances, insulin sensitivity, chronic low energy, and appetite dysregulation.
+            </p>
+          </motion.div>
+
+          {/* Stats bar */}
+          <motion.div
+            className="grid grid-cols-3 gap-6 max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            {[
+              { num: "7", label: "Powerful Modalities" },
+              { num: "5", label: "Root Causes Targeted" },
+              { num: "1", label: "Personalized Plan" },
+            ].map((s, i) => (
+              <div key={i} className="text-center bg-white rounded-2xl py-6 px-4 shadow-md">
+                <p className="font-display text-5xl font-bold text-primary mb-1">{s.num}</p>
+                <p className="text-sm font-medium text-muted-foreground">{s.label}</p>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* 7 Modalities grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 max-w-7xl mx-auto mb-14">
+            {[
+              {
+                num: "01",
+                title: "GLP-1 Peptide Injections",
+                desc: "The same active class as Ozempic & Wegovy — targeting appetite dysregulation and insulin resistance with clinical trials showing 15–20% total body weight reduction.",
+                tags: ["Appetite Control", "Insulin Sensitivity", "Fat Reduction"],
+              },
+              {
+                num: "02",
+                title: "Lipo Shots",
+                desc: "Lipotropic compounds that stimulate your liver to process and eliminate fat more efficiently, amplifying how quickly your body mobilizes stored fat for energy.",
+                tags: ["Fat Mobilization", "Liver Support", "Metabolic Boost"],
+              },
+              {
+                num: "03",
+                title: "NAD+ Injections",
+                desc: "Restores mitochondrial function and reignites the metabolic fire that allows your body to burn fat efficiently — especially during exercise and between sessions.",
+                tags: ["Cellular Energy", "Metabolic Restoration", "Anti-Aging"],
+              },
+              {
+                num: "04",
+                title: "Vitamin B Injections",
+                desc: "Injected B vitamins achieve tissue levels up to 10× higher than oral supplements — delivering immediate improvement in energy, mood, and metabolic activity.",
+                tags: ["Energy Production", "Metabolism Support", "Mood & Clarity"],
+              },
+              {
+                num: "05",
+                title: "Fat-Burning Light Therapy",
+                desc: "Medical-grade red and near-infrared light penetrates adipose tissue, triggering fat cells to release stored lipids while reducing systemic inflammation.",
+                tags: ["Adipose Release", "Anti-Inflammation", "Hormonal Balance"],
+              },
+              {
+                num: "06",
+                title: "Juvent Vibration Plate",
+                desc: "Clinically studied micro-impact platform that engages up to 97% of muscle fibers, improves insulin sensitivity, and preserves lean muscle during weight loss.",
+                tags: ["Muscle Preservation", "Insulin Sensitivity", "HGH Stimulation"],
+              },
+              {
+                num: "07",
+                title: "Hydrogen Therapy",
+                desc: "Molecular hydrogen neutralizes the most damaging reactive oxygen species, reducing chronic inflammation that drives metabolic dysfunction and insulin resistance.",
+                tags: ["Oxidative Stress", "Mitochondrial Health", "Anti-Inflammatory"],
+              },
+            ].map((mod, i) => (
+              <motion.div
+                key={i}
+                className="bg-white rounded-3xl p-6 shadow-md flex flex-col"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+              >
+                <p className="font-display text-3xl font-bold text-primary/20 mb-3">{mod.num}</p>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-3 leading-snug">{mod.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">{mod.desc}</p>
+                <div className="flex flex-wrap gap-1">
+                  {mod.tags.map((tag) => (
+                    <span key={tag} className="text-xs px-2 py-1 rounded-full bg-[#FBF0EE] text-primary font-medium">{tag}</span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+
+            {/* CTA card — 8th slot */}
+            <motion.div
+              className="rounded-3xl p-6 flex flex-col justify-between text-white"
+              style={{ background: "linear-gradient(145deg, #C9908A, #7A4A3A)" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.56 }}
+            >
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase opacity-70 mb-3">New Patient Special</p>
+                <p className="font-display text-6xl font-bold leading-none mb-2">$250</p>
+                <p className="font-display text-xl font-semibold opacity-90 mb-4">Off Your First Month</p>
+                <p className="text-sm opacity-75 leading-relaxed mb-6">Metabolic Reset Program — complimentary consultation included.</p>
+              </div>
+              <a
+                href="https://totalbodyaesthetic.com/metabolic-reset-weight-loss-program.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full bg-white text-primary font-semibold py-3 rounded-xl text-center hover:bg-white/90 transition-colors text-sm"
+              >
+                Learn More & Book
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <a
+              href="https://totalbodyaesthetic.com/metabolic-reset-weight-loss-program.html"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-10 py-6 text-lg rounded-full shadow-lg">
+                Explore the Full Metabolic Reset Program
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+            </a>
+            <p className="text-sm text-muted-foreground mt-4">
+              Call for a complimentary consultation:{" "}
+              <a href="tel:+13106701920" className="text-primary font-semibold hover:underline">(310) 670-1920</a>
+            </p>
+          </motion.div>
+
+        </div>
+      </section>
+
       {/* Weight Loss Injection Before & After */}
-      <section className="py-20 lg:py-32 bg-gradient-soft">
+      <section className="py-20 lg:py-32 bg-[#FBF0EE]">
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-12"
@@ -714,7 +923,7 @@ export default function Home() {
           </motion.div>
 
           {/* Before & After Gallery */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {[beforeAfter1, beforeAfter2, beforeAfter3, beforeAfter4, beforeAfter5, beforeAfter6, beforeAfter7].map((img, index) => (
               <motion.div
                 key={index}
@@ -742,55 +951,117 @@ export default function Home() {
       {/* Weight Loss Injection Cost */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="font-display text-3xl md:text-4xl font-semibold mb-6 text-foreground">
-                Weight Loss Injection{" "}
-                <span className="text-gradient">Cost</span> in Los Angeles
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-                The precise cost of weight loss injections depends on several factors including your provider's expertise and your current weight. A higher starting weight may require additional treatments to get you where you want to be. This results in a higher cost.
-              </p>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Obtain a personalized estimate for weight loss injections by scheduling a consultation with us. After discussing your weight loss goals and assessing your current health, a specialist can let you know how much your treatment plan will cost.
-              </p>
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full shadow-lg"
-                onClick={() => document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left — text */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
               >
-                Get $50 Off Today
-                <ChevronRight className="w-5 h-5 ml-2" />
-              </Button>
-            </motion.div>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-6 text-foreground leading-tight">
+                  Weight Loss Injection{" "}
+                  <span className="text-primary">Cost</span> in Los Angeles
+                </h2>
+                <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                  The precise cost of weight loss injections depends on several factors including your provider's expertise and your current weight. A higher starting weight may require additional treatments to get you where you want to be. This results in a higher cost.
+                </p>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  Obtain a personalized estimate for weight loss injections by scheduling a consultation with us. After discussing your weight loss goals and assessing your current health, a specialist can let you know how much your treatment plan will cost.
+                </p>
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg rounded-full shadow-lg"
+                  onClick={() => document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Get $50 Off Today
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </Button>
+              </motion.div>
+
+              {/* Right — highlighted offer card */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="rounded-3xl overflow-hidden shadow-2xl" style={{ background: "linear-gradient(145deg, #C9908A, #A07060)" }}>
+                  <div className="p-10 text-center text-white">
+                    <p className="text-sm font-semibold tracking-widest uppercase mb-3 opacity-80">New Client Special</p>
+                    <p className="font-display text-8xl font-bold leading-none mb-2">$50</p>
+                    <p className="font-display text-2xl font-semibold mb-6 opacity-90">Off Your First Visit</p>
+                    <div className="w-16 h-px bg-white/30 mx-auto mb-6" />
+                    <p className="text-sm opacity-80 mb-8 leading-relaxed">Physician-supervised weight loss program in Los Angeles, CA</p>
+                    <button
+                      className="w-full bg-white text-primary font-semibold py-4 rounded-xl hover:bg-white/90 transition-colors text-lg"
+                      onClick={() => document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })}
+                    >
+                      Claim Offer
+                    </button>
+                    <p className="text-xs opacity-60 mt-4">
+                      <a href="tel:+13106701920" className="hover:opacity-100 transition-opacity">(310) 670-1920</a>
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Weight Loss Injection Results */}
-      <section className="py-20 lg:py-28 bg-gradient-to-b from-[#F5F0E8] to-white">
+      <section className="py-20 lg:py-28 bg-[#FBF0EE]">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <motion.div
+              className="text-center mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-display text-3xl md:text-4xl font-semibold mb-6 text-foreground">
-                Weight Loss Injection{" "}
-                <span className="text-gradient">Results</span>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 text-foreground">
+                Weight Loss Injection <span className="text-primary">Results</span>
               </h2>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            </motion.div>
+
+            {/* Stat highlights */}
+            <div className="grid grid-cols-3 gap-6 mb-12">
+              {[
+                { stat: "Once", label: "weekly injection", sub: "simple, convenient dosing" },
+                { stat: "3–6", label: "months typical plan", sub: "physician-monitored progress" },
+                { stat: "Real", label: "patient results", sub: "see our before & afters" },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="bg-white rounded-3xl p-8 text-center shadow-md"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                  <p className="font-display text-5xl font-bold text-primary mb-2">{item.stat}</p>
+                  <p className="font-semibold text-foreground capitalize">{item.label}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{item.sub}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.div
+              className="bg-white rounded-3xl p-10 shadow-md space-y-6 text-lg text-muted-foreground leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              <p>
                 Weight loss injections treat obesity, a condition characterized by excess body fat. They work by suppressing hunger and promoting weight loss, helping to improve your body mass index (BMI).
               </p>
-              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+              <p>
                 Results aren't immediate with weight loss injections so it's crucial to have realistic expectations and practice consistency. Stick with your treatment plan and make healthy lifestyle changes for the best outcome. We suggest eating balanced meals and exercising every day to maximize weight loss injection benefits.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
+              <p>
                 Personal results vary based on factors such as starting weight and lifestyle habits. Tracking your progress with before and after pictures will give a visual of how your body responds to the treatment over time. Many of our patients do this and find it keeps them motivated to stay on top of their weight loss goals!
               </p>
             </motion.div>
@@ -799,7 +1070,7 @@ export default function Home() {
       </section>
 
       {/* Dr. Tabiza Section */}
-      <section className="py-20 lg:py-32 bg-white">
+      <section className="py-20 lg:py-32" style={{ background: "#3D2318" }}>
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -807,21 +1078,17 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-4 text-white">
               Your Aesthetic Journey Begins with{" "}
-              <span className="text-gradient">Expert Medical Care</span>
+              <span style={{ color: "#F0D5CC" }}>Expert Medical Care</span>
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
-                title: "Meet Dr. Jennifer Tabiza",
-                description: "Dedicated physician with a passion for helping patients achieve their cosmetic goals through personalized aesthetic treatments and access to the latest available technology."
-              },
-              {
                 title: "Clinical Excellence",
-                description: "Dr. Tabiza and a team of professional aesthetics providers, combines vast knowledge and expertise with compassionate care at their boutique clinic in the Westchester area of Los Angeles."
+                description: "The team at Total Body Aesthetic combines vast knowledge and expertise with compassionate care at their boutique clinic in the Westchester area of Los Angeles."
               },
               {
                 title: "Philosophy of Care",
@@ -829,7 +1096,7 @@ export default function Home() {
               },
               {
                 title: "Patient-Centered Experience",
-                description: "Dr. Tabiza and the team work diligently to ensure patients feel comfortable and supported throughout their aesthetic journey, focusing on safe, effective treatments that help achieve desired cosmetic outcomes."
+                description: "The team at Total Body Aesthetic works diligently to ensure patients feel comfortable and supported throughout their aesthetic journey, focusing on safe, effective treatments that help achieve desired cosmetic outcomes."
               },
               {
                 title: "Creating Your Sanctuary",
@@ -838,45 +1105,48 @@ export default function Home() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-3xl p-8 shadow-lg border border-border/50"
+                className="rounded-3xl p-8"
+                style={{ background: "rgba(255,255,255,0.07)", borderLeft: "3px solid #C9908A" }}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <h3 className="font-display text-xl font-semibold mb-3 text-primary">{item.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                <h3 className="font-display text-xl font-semibold mb-3" style={{ color: "#F0D5CC" }}>{item.title}</h3>
+                <p className="leading-relaxed" style={{ color: "rgba(240,213,204,0.7)" }}>{item.description}</p>
               </motion.div>
             ))}
           </div>
 
           {/* Closing weight loss injections section */}
           <motion.div
-            className="max-w-4xl mx-auto mt-16 p-8 bg-gradient-soft rounded-3xl border border-border/50"
+            className="max-w-4xl mx-auto mt-16 p-10 rounded-3xl"
+            style={{ background: "rgba(255,255,255,0.1)", border: "1px solid rgba(201,144,138,0.4)" }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-display text-2xl font-semibold mb-4">Weight Loss Injections in Los Angeles, CA</h3>
-            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+            <h3 className="font-display text-2xl font-semibold mb-4 text-white">Weight Loss Injections in Los Angeles, CA</h3>
+            <p className="text-lg leading-relaxed mb-6" style={{ color: "rgba(240,213,204,0.8)" }}>
               Weight loss injections may be an option for some adults as part of a medically supervised weight management plan. At Total Body Aesthetic, our providers create individualized plans based on each patient's health and goals. To find out whether treatment may be right for you, call{" "}
               <a href="tel:+13106701920" className="text-primary font-semibold hover:underline">(310) 670-1920</a>{" "}
               to schedule a medical consultation.
             </p>
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full shadow-lg"
-              onClick={() => document.getElementById('book')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Schedule a Consultation
-              <ChevronRight className="w-5 h-5 ml-2" />
-            </Button>
+            <a href="https://totalbodyaesthetic.com/#book-now" target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full shadow-lg"
+              >
+                Schedule a Consultation
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+            </a>
           </motion.div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 lg:py-32 bg-gradient-soft">
+      <section className="py-20 lg:py-32 bg-white">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center max-w-3xl mx-auto mb-16"
