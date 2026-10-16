@@ -7,7 +7,7 @@ Los Angeles, CA (Remote) · [phone] · [email] · [linkedin.com/in/…] · [port
 
 ## Summary
 
-A website and digital marketing leader who builds, runs and grows websites for healthcare brands, from venture-backed tech to local practices. As co-founder and CMO of **Dr. Contact Lens**, I owned the website, SEO, UI/UX, brand and digital operations as the company scaled to **1,000+ partner practices** and **[$300M+] in contact lens sales** in six years. I'm also a licensed optometrist, so I know the eye-care customer, the clinician and the industry from the inside. I write the copy, design the pages, run the analytics and ship the site myself.
+A website and digital marketing leader who builds, runs and grows websites for healthcare brands, from venture-backed tech to local practices. As co-founder and CMO of **Dr. Contact Lens**, I owned the website, SEO, UI/UX, brand and digital operations as the company scaled to **1,000+ partner practices** and **[$300M+] in contact lens sales** in six years. I'm also a licensed optometrist, so I know the eye-care customer, the clinician and the industry from the inside. I write the copy, design the pages, run the analytics and ship the site myself, and I build AI agents and automations that let a lean team move faster.
 
 ## Core Skills
 
@@ -16,6 +16,7 @@ A website and digital marketing leader who builds, runs and grows websites for h
 - **UI/UX & conversion:** page and funnel design, UX writing, A/B testing, forms and lead capture, booking and checkout flows
 - **Brand & content:** brand systems, visual identity, copywriting, social media, email marketing
 - **Analytics:** [GA4, Google Tag Manager, Search Console, Looker Studio], conversion tracking, reporting to leadership
+- **AI & automation:** building AI agents and automated workflows for content, SEO, lead handling and site operations; AI-assisted web development
 - **Operations:** systems and workflow design, project management, cross-functional launches, budget ownership
 - **Tools:** [WordPress · Shopify · Webflow · Squarespace · Figma · Canva · HubSpot · Klaviyo · Semrush/Ahrefs · Replit · React-based AI-assisted builds] ← *keep only what you actually use*
 
@@ -47,6 +48,7 @@ A consulting practice that builds and manages websites, brands and marketing for
 
 - Act as **outsourced website manager and marketing lead** for [X] clients: site builds and redesigns, ongoing content updates, SEO, branding and social media.
 - Design and build **conversion-focused websites and landing pages**, including AI-assisted React builds deployed on Replit (e.g. a GLP-1 weight-loss acquisition page with a qualification quiz, before/after gallery, social proof and lead capture).
+- Build **AI agents and automations** for clients and my own businesses: [e.g. lead intake/follow-up, content and SEO production, reporting, customer support]. [Result: hours saved / response time / volume]
 - Run **local SEO and Google Business Profile** programs for practices: [result, e.g. "moved client into the top-3 map pack for Z"].
 - Deliver **brand identity systems** (logo, palette, typography, voice) and the templates clients' teams use day to day.
 - [Representative result with a number]
