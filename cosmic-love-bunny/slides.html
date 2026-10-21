@@ -15,94 +15,198 @@ canvas{position:absolute;inset:0;width:1080px;height:1350px}
 .rule{width:64px;height:1px;background:currentColor;opacity:.6;margin:34px 0}
 .foot{position:absolute;bottom:62px;left:110px;right:110px;display:flex;justify-content:space-between;font-family:Jost;font-weight:400;font-size:21px;letter-spacing:.32em;text-transform:uppercase;opacity:.7}
 .center{text-align:center}.center .rule{margin:34px auto}.center .body{margin:0 auto}
-</style></head><body><div id="deck"></div>
+</style></head><body><script id="frag" type="x-shader/x-fragment">precision highp float;
+uniform vec2 R; uniform float S; uniform float SD;
+float h1(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
+float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+ return mix(mix(h1(i),h1(i+vec2(1.,0.)),f.x),mix(h1(i+vec2(0.,1.)),h1(i+vec2(1.,1.)),f.x),f.y);}
+float fbm(vec2 p){float s=0.,a=.5;for(int i=0;i<6;i++){s+=a*vn(p);p=mat2(1.6,1.2,-1.2,1.6)*p+vec2(SD,7.3);a*=.5;}return s/.984;}
+float fbm3(vec2 p){float s=0.,a=.5;for(int i=0;i<3;i++){s+=a*vn(p);p=mat2(1.6,1.2,-1.2,1.6)*p+vec2(3.1,SD);a*=.5;}return s/.875;}
+float ss(float a,float b,float x){return smoothstep(a,b,x);}
+float inv(float a,float b,float x){return 1.-smoothstep(a,b,x);}
+vec3 hue(float h){return clamp(vec3(abs(h*6.-3.)-1.,2.-abs(h*6.-2.),2.-abs(h*6.-4.)),0.,1.);}
+vec3 C(float r,float g,float b){return vec3(r,g,b)/255.;}
+vec3 grad4(float y,vec3 a,vec3 b,vec3 c,vec3 d,float y1,float y2,float y3){
+ vec3 k=mix(a,b,ss(0.,y1,y));k=mix(k,c,ss(y1,y2,y));return mix(k,d,ss(y2,y3,y));}
+vec3 glow(vec3 col,vec2 p,vec2 c,vec3 g,float k1,float a1,float k2,float a2){float d=length(p-c);return col+g*(exp(-d*k1)*a1+exp(-d*k2)*a2);}
+vec3 rainbow(vec3 col,vec2 p,vec2 c,float r,float w,float k,float flip){
+ float d=length(p-c),t=(d-(r-w))/(2.*w);
+ float m=ss(0.,.2,t)*inv(.8,1.,t);
+ float h=mix(1.-t,t,flip);
+ col+=hue(clamp(h,0.,1.)*.78)*m*k;
+ if(flip<.5)col+=vec3(k*.1)*ss(r-w-.22,r-w,d)*step(d,r-w);
+ return col;}
+vec3 stars(vec3 col,vec2 p,float dens,float k){
+ vec2 g=p*R.x/2.2,i=floor(g),f=fract(g)-.5;float r=h1(i+SD*.1);
+ float b=step(1.-dens,r)*inv(0.,.5,length(f))*pow(h1(i+3.7),2.);
+ vec2 g2=p*28.,i2=floor(g2),f2=fract(g2)-.5;float r2=h1(i2+9.1+SD);
+ float big=step(.965,r2);vec2 o=f2-(vec2(h1(i2),h1(i2+1.))-.5)*.6;float L=length(o);
+ float spark=big*(exp(-L*60.)+ (exp(-abs(o.x)*300.)+exp(-abs(o.y)*300.))*exp(-L*14.)*.5);
+ return col+vec3(1.,.96,.92)*(b*1.2+spark*1.3)*k;}
+vec4 cloud(vec2 p,float base,float amp,float fq,float sd,vec2 sun,vec3 lit,vec3 shd,float cx,float wid){
+ float x=p.x*fq+sd*13.;
+ float env=wid>0.?exp(-pow((p.x-cx)/wid,2.)):1.;
+ float top=base+amp*env*(.6*fbm3(vec2(x,sd))+.4*pow(vn(vec2(x*2.7,sd*3.)),2.))+.018*(fbm3(p*vec2(26.,34.)+sd)-.5);
+ float dep=top-p.y;if(dep<0.)return vec4(0.);
+ vec2 q=p*vec2(fq*3.,fq*4.)+sd*5.;
+ float n=fbm(q);vec2 sdir=normalize(sun-p+1e-4);float n2=fbm(q+sdir*.3);
+ float rim=exp(-dep*16.*fq);
+ float l=clamp(.18+rim*.75+(n-n2)*2.6+(n-.5)*.55,0.,1.);
+ l=mix(l,floor(l*5.+.5)/5.,.3);
+ vec3 c=mix(shd,lit,l);
+ return vec4(c,ss(0.,.004+.02*n,dep));}
+vec3 lay(vec3 col,vec4 L,vec3 haze,float hz){return mix(col,mix(L.rgb,haze,hz),L.a);}
+vec3 planet(vec3 col,vec2 p,vec2 c,float r,vec2 ld,vec3 c1,vec3 c2,vec3 atm,float tilt){
+ vec2 q=p-c;float ca=cos(tilt),sa=sin(tilt);vec2 rq=vec2(ca*q.x+sa*q.y,-sa*q.x+ca*q.y);
+ float e=length(rq*vec2(1.,4.));
+ float rm=ss(1.32*r,1.38*r,e)*inv(2.05*r,2.15*r,e)*(.55+.45*sin(e/r*55.))*(.7+.3*sin(e/r*13.));
+ vec3 rc=mix(c1,atm,.55)*1.15;float d=length(q);
+ if(rq.y>0.)col=mix(col,rc,rm*.7);
+ col+=atm*exp(-max(d-r,0.)*45.)*.45;
+ if(d<r){vec2 n2=q/r;float z=sqrt(max(0.,1.-dot(n2,n2)));vec3 N=vec3(n2,z);
+  float lam=clamp(dot(N,normalize(vec3(ld,.45))),0.,1.);
+  float s=fbm(vec2(rq.y/r*5.+fbm3(rq/r*3.)*1.8,rq.x/r*1.2));
+  vec3 pc=mix(c1,c2,ss(.3,.75,s))*(.08+1.15*lam)+atm*pow(1.-z,2.5)*.9*(.3+lam);
+  col=mix(col,pc,inv(r-.002,r,d));}
+ if(rq.y<=0.)col=mix(col,rc*(d<r?1.:1.),rm*.85);
+ return col;}
+vec3 rays(vec3 col,vec2 p,vec2 c,vec3 rc,float k){vec2 q=p-c;float d=length(q);vec2 u=q/(d+1e-5);
+ float r=pow(vn(u*7.+SD),3.)*.8+pow(vn(u*19.+SD+4.),4.)*.7;
+ return col+rc*r*k*exp(-d*1.6)*ss(.02,.12,d);}
+vec3 aurora(vec3 col,vec2 p,float y0,vec3 a,vec3 b,vec3 cc,float k){
+ for(int i=0;i<3;i++){float fi=float(i);
+  float yc=y0+fi*.08+.13*(fbm3(vec2(p.x*1.3+fi*3.,fi))-.5)+.04*sin(p.x*6.+fi*2.);
+  float up=p.y-yc;
+  float b0=up>0.?exp(-up*(2.4+fi))*(.25+pow(fbm3(vec2(p.x*42.+fi*9.,p.y*.7)),2.)*1.5):exp(up*28.);
+  vec3 ac=mix(a,b,clamp(up*3.,0.,1.));ac=mix(ac,cc,clamp(up*3.-1.,0.,1.));
+  col+=ac*b0*k*(1.-fi*.25);}
+ return col;}
+vec4 dune(vec2 p,float base,float amp,float fq,float sd,vec3 lit,vec3 shd){
+ float x=p.x*fq+sd*7.,e=.004*fq;
+ float t0=base+amp*(1.-abs(fbm3(vec2(x,sd))*2.-1.));
+ float t1=base+amp*(1.-abs(fbm3(vec2(x+e,sd))*2.-1.));
+ float dep=t0-p.y;if(dep<0.)return vec4(0.);
+ float sl=(t1-t0)/e;
+ vec3 c=mix(shd,lit,ss(-1.6,1.6,-sl));
+ c=mix(c,shd*.75,ss(0.,.25,dep)*.6);
+ c+=lit*.06*sin(p.y*900./fq*.4+fbm3(p*18.+sd)*10.)*inv(0.,.1,dep);
+ c+=lit*.5*exp(-dep*220.);
+ return vec4(c,ss(0.,.002,dep));}
+// ---------------- scenes ----------------
+vec3 s0(vec2 p){ // cover: planet rising over a sea of clouds, rainbow arc
+ vec2 sun=vec2(.5,.47);
+ vec3 col=grad4(p.y,C(255.,214.,140.),C(255.,140.,90.),C(196.,58.,118.),C(32.,18.,70.),.5,.78,1.18);
+ col=stars(col,p,.006,ss(.85,1.15,p.y));
+ col=mix(col,C(120.,70.,160.),.25*fbm3(p*vec2(2.,4.))*ss(.7,1.1,p.y));
+ col=planet(col,p,vec2(.78,.6),.105,vec2(-.6,-.8),C(110.,190.,210.),C(180.,140.,230.),C(150.,230.,255.),.35);
+ col=glow(col,p,sun,C(255.,226.,170.),9.,.6,40.,1.2);
+ col=rays(col,p,sun,C(255.,210.,170.),.35);
+ col=rainbow(col,p,vec2(.5,.12),.56,.038,.5,0.);
+ vec3 L1=C(255.,205.,160.),S1=C(150.,70.,120.);
+ col=lay(col,cloud(p,.46,.03,2.4,1.,sun,L1,S1,0.,0.),C(255.,190.,150.),.55);
+ col=lay(col,cloud(p,.39,.06,1.7,2.,sun,L1,S1,0.,0.),C(240.,150.,150.),.35);
+ col=lay(col,cloud(p,.28,.09,1.25,3.,sun,C(255.,190.,170.),C(120.,60.,120.),0.,0.),C(200.,110.,150.),.15);
+ col=lay(col,cloud(p,.12,.13,.9,4.,sun,C(250.,170.,180.),C(80.,40.,100.),0.,0.),C(0.,0.,0.),0.);
+ return col;}
+vec3 s1(vec2 p){ // rainbow beam falling through a cloud canyon
+ vec3 col=grad4(p.y,C(90.,200.,200.),C(60.,120.,190.),C(52.,46.,140.),C(20.,14.,50.),.35,.75,1.2);
+ col=stars(col,p,.008,ss(.7,1.1,p.y));
+ float bw=.025+.05*ss(1.25,.3,p.y);float bx=(p.x-.5+.03*(p.y-.6))/bw;
+ float bm=exp(-bx*bx*1.3)*ss(.3,.42,p.y);
+ col+=hue(clamp(bx*.33+.4,0.,1.)*.78)*bm*.8+vec3(1.)*exp(-bx*bx*8.)*ss(.3,.4,p.y)*.35;
+ col=glow(col,p,vec2(.5,.36),C(255.,240.,220.),14.,.7,60.,1.);
+ vec2 src=vec2(.5,.4);
+ col=lay(col,cloud(vec2(p.y,p.x),.16,.2,3.2,5.,src.yx,C(200.,240.,255.),C(70.,60.,150.),0.,0.),C(80.,110.,180.),.25);
+ col=lay(col,cloud(vec2(p.y,1.-p.x),.16,.2,3.2,6.,vec2(.4,.5),C(255.,210.,240.),C(80.,50.,140.),0.,0.),C(80.,110.,180.),.25);
+ col=lay(col,cloud(vec2(p.y,p.x),.03,.14,4.,7.,src.yx,C(230.,250.,255.),C(50.,40.,110.),0.,0.),C(0.,0.,0.),0.);
+ col=lay(col,cloud(vec2(p.y,1.-p.x),.03,.14,4.,8.,vec2(.4,.5),C(255.,225.,245.),C(50.,40.,110.),0.,0.),C(0.,0.,0.),0.);
+ col=lay(col,cloud(p,.34,.05,2.2,9.,vec2(.5,.45),C(255.,250.,235.),C(100.,120.,190.),0.,0.),C(160.,210.,230.),.2);
+ col=lay(col,cloud(p,.2,.1,1.3,10.,vec2(.5,.45),C(230.,230.,255.),C(70.,60.,140.),0.,0.),C(0.,0.,0.),0.);
+ return col;}
+vec3 s2(vec2 p){ // twin moons and aurora over rose dunes
+ vec3 col=grad4(p.y,C(255.,120.,120.),C(170.,60.,140.),C(60.,26.,100.),C(12.,8.,32.),.4,.7,1.15);
+ col=stars(col,p,.01,ss(.5,1.,p.y));
+ col=aurora(col,p,.62,C(90.,255.,190.),C(120.,170.,255.),C(255.,90.,210.),.55);
+ col=planet(col,p,vec2(.3,1.0),.085,vec2(.8,-.3),C(255.,220.,230.),C(230.,180.,210.),C(255.,200.,230.),9.);
+ col=glow(col,p,vec2(.72,.86),C(180.,220.,255.),30.,.2,200.,0.);
+ float dm=length(p-vec2(.72,.86));if(dm<.035)col=mix(C(190.,225.,255.),C(140.,170.,230.),fbm3(p*90.)*.6);
+ col=lay(col,dune(p,.36,.08,1.6,1.,C(255.,150.,140.),C(140.,60.,120.)),C(220.,100.,140.),.4);
+ col=lay(col,dune(p,.27,.1,1.2,2.,C(255.,170.,150.),C(120.,50.,110.)),C(0.,0.,0.),0.);
+ col=lay(col,dune(p,.12,.14,.9,3.,C(255.,185.,160.),C(100.,40.,100.)),C(0.,0.,0.),0.);
+ return col;}
+vec3 sky4(vec2 p){
+ vec3 col=grad4(p.y,C(255.,120.,110.),C(160.,60.,150.),C(40.,30.,110.),C(8.,8.,30.),.42,.6,1.1);
+ vec2 o=vec2(.35,.36),dir=normalize(vec2(.55,.9)),nr=vec2(-dir.y,dir.x);vec2 q=p-o;
+ float t=dot(q,dir),s=dot(q,nr)+.05*(fbm3(vec2(t*3.,1.))-.5);float w=.13;
+ float I=exp(-s*s/(w*w))*(.35+.9*fbm(vec2(t*4.,s*9.)));
+ float dust=ss(.42,.7,fbm(vec2(t*7.,s*16.)+3.))*exp(-s*s/(.05*.05));
+ I*=1.-dust*.85;
+ vec2 core=vec2(.47,.56);float cd=length(p-core);
+ vec3 mc=mix(C(110.,120.,255.),C(200.,110.,255.),ss(-.1,.1,s));mc=mix(mc,C(255.,200.,160.),exp(-cd*5.));
+ col+=mc*I*.95+C(255.,220.,190.)*exp(-cd*9.)*.35;
+ col=stars(col,p,.012+.03*exp(-s*s/(w*w)),ss(.38,.6,p.y));
+ return col;}
+vec3 s3(vec2 p){ // galaxy over a glowing ocean
+ float hz=.36;
+ if(p.y>=hz){vec3 c=sky4(p);return c+C(255.,150.,120.)*exp(-(p.y-hz)*25.)*.4;}
+ float dz=hz-p.y,z=1./(dz+.025);
+ float rip=fbm3(vec2(p.x*z*.9,z*1.3));
+ vec3 r=sky4(vec2(p.x+(rip-.5)*.05,hz+dz*1.5));
+ vec3 col=mix(C(10.,14.,40.),r,.55+.25*rip);
+ float crest=pow(fbm(vec2(p.x*2.5,z*.9)),5.)*10.;
+ col+=C(60.,255.,230.)*crest*ss(.22,0.,p.y)*.9;
+ col+=C(80.,255.,220.)*pow(rip,6.)*3.*ss(.3,0.,p.y);
+ return col;}
+vec3 s4(vec2 p){ // glory halo inside the clouds
+ vec2 c=vec2(.5,.74);float d=length(p-c);
+ vec3 col=grad4(p.y,C(150.,140.,230.),C(255.,190.,200.),C(150.,200.,255.),C(70.,90.,200.),.3,.75,1.2);
+ col=rays(col,p,c,C(255.,240.,220.),.45);
+ col+=hue(fract(d/.05)*.8)*exp(-d*14.)*.3*ss(.03,.08,d);
+ col=rainbow(col,p,c,.3,.02,.35,0.);
+ col=glow(col,p,c,C(255.,245.,225.),12.,.8,70.,1.6);
+ vec4 top1=cloud(vec2(p.x,1.25-p.y),.18,.12,1.4,2.,vec2(.5,.5),C(255.,220.,240.),C(110.,110.,200.),0.,0.);
+ vec4 top2=cloud(vec2(p.x,1.25-p.y),.05,.1,1.9,3.,vec2(.5,.5),C(250.,230.,255.),C(80.,80.,180.),0.,0.);
+ col=lay(col,top1,C(200.,190.,255.),.3);col=lay(col,top2,C(0.,0.,0.),0.);
+ col=lay(col,cloud(p,.5,.06,2.,4.,c,C(255.,235.,220.),C(170.,140.,220.),0.,0.),C(255.,200.,220.),.4);
+ col=lay(col,cloud(p,.38,.1,1.4,5.,c,C(255.,215.,215.),C(130.,110.,210.),0.,0.),C(230.,170.,220.),.2);
+ col=lay(col,cloud(p,.18,.14,1.,6.,c,C(255.,200.,200.),C(90.,80.,180.),0.,0.),C(0.,0.,0.),0.);
+ return col;}
+vec3 s5(vec2 p){ // dawn cumulus tower with a double rainbow
+ vec2 sun=vec2(.12,.36);
+ vec3 col=grad4(p.y,C(255.,200.,170.),C(255.,170.,190.),C(80.,170.,200.),C(30.,80.,140.),.3,.75,1.2);
+ col=glow(col,p,sun,C(255.,230.,180.),6.,.5,40.,1.);
+ col=rays(col,p,sun,C(255.,230.,200.),.25);
+ vec2 rc=vec2(.55,-.18);
+ float dd=length(p-rc);col*=1.-.12*ss(.79,.8,dd)*inv(.88,.89,dd);
+ col=rainbow(col,p,rc,.76,.034,.55,0.);col=rainbow(col,p,rc,.93,.04,.25,1.);
+ col=lay(col,cloud(p,.3,.95,.75,3.,sun,C(255.,215.,190.),C(120.,100.,170.),.6,.24),C(200.,190.,230.),.12);
+ col=lay(col,cloud(p,.25,.05,2.2,4.,sun,C(255.,230.,210.),C(150.,120.,180.),0.,0.),C(255.,200.,200.),.3);
+ col=lay(col,cloud(p,.12,.1,1.2,5.,sun,C(255.,210.,200.),C(110.,80.,150.),0.,0.),C(0.,0.,0.),0.);
+ return col;}
+void main(){
+ vec2 p=gl_FragCoord.xy/R.x;vec3 col;
+ if(S<.5)col=s0(p);else if(S<1.5)col=s1(p);else if(S<2.5)col=s2(p);else if(S<3.5)col=s3(p);else if(S<4.5)col=s4(p);else col=s5(p);
+ col=col/(1.+col*.18);
+ float l=dot(col,vec3(.3,.59,.11));col=mix(vec3(l),col,1.08);
+ col=col*.93+.035;
+ float v=length((p-vec2(.5,.625))*vec2(1.,.8));col*=1.-.32*pow(v*1.3,2.4);
+ gl_FragColor=vec4(clamp(col,0.,1.),1.);}
+</script><div id="deck"></div>
 <script>
 const W=1080,H=1350,HANDLE='@cosmiclovebunny';
-// ---------- noise ----------
+const FRAG=document.getElementById('frag').textContent;
+const gl_c=document.createElement('canvas');gl_c.width=W;gl_c.height=H;
+const gl=gl_c.getContext('webgl',{preserveDrawingBuffer:true});
+function sh(t,src){const o=gl.createShader(t);gl.shaderSource(o,src);gl.compileShader(o);if(!gl.getShaderParameter(o,gl.COMPILE_STATUS)){console.log(gl.getShaderInfoLog(o));window.DONE=1;throw 0};return o}
+const prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'));
+gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FRAG));gl.linkProgram(prog);gl.useProgram(prog);
+const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+gl.enableVertexAttribArray(0);gl.vertexAttribPointer(0,2,gl.FLOAT,false,0,0);gl.viewport(0,0,W,H);
 function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
-let P=new Uint8Array(512);function seedNoise(sd){const r=rng(sd);const p=[...Array(256).keys()];for(let i=255;i>0;i--){const j=Math.floor(r()*(i+1));[p[i],p[j]]=[p[j],p[i]]}for(let i=0;i<512;i++)P[i]=p[i&255]}
-const fade=t=>t*t*t*(t*(t*6-15)+10),lerp=(a,b,t)=>a+(b-a)*t;
-function grad(h,x,y){const g=h&7;const u=g<4?x:y,v=g<4?y:x;return((g&1)?-u:u)+((g&2)?-2*v:2*v)}
-function noise(x,y){const X=Math.floor(x)&255,Y=Math.floor(y)&255;x-=Math.floor(x);y-=Math.floor(y);const u=fade(x),v=fade(y);
-const a=P[X]+Y,b=P[X+1]+Y;return lerp(lerp(grad(P[a],x,y),grad(P[b],x-1,y),u),lerp(grad(P[a+1],x,y-1),grad(P[b+1],x-1,y-1),u),v)*.35+.5}
-function fbm(x,y,o=5){let s=0,a=.5,f=1,n=0;for(let i=0;i<o;i++){s+=a*noise(x*f,y*f);n+=a;a*=.5;f*=2.03}return s/n}
-const cl=x=>x<0?0:x>1?1:x,ss=(a,b,x)=>{const t=cl((x-a)/(b-a));return t*t*(3-2*t)};
-const hex=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255);
-const mixc=(a,b,t)=>[lerp(a[0],b[0],t),lerp(a[1],b[1],t),lerp(a[2],b[2],t)];
-const add=(a,b,k)=>[a[0]+b[0]*k,a[1]+b[1]*k,a[2]+b[2]*k];
-// ---------- scenes: f(u,v) -> rgb, u in [0,1], v in [0,1.25] ----------
-const scenes={
-eclipse(){const sky=hex('#2a1e2e'),hz=hex('#c98a6b'),fog=hex('#e8c3a8'),cor=hex('#ffd9b0'),deep=hex('#120c14');
- return(u,v)=>{const cx=.5,cy=.63,r=.14;let c=mixc(sky,hz,ss(.15,.82,v));
-  c=mixc(c,hex('#6a3f52'),.35*fbm(u*2.2,v*1.6,4));
-  const dx=u-cx,dy=v-cy,d=Math.hypot(dx,dy),a=Math.atan2(dy,dx);
-  const streak=.55+.9*fbm(Math.cos(a)*3+7,Math.sin(a)*3+d*2,4);
-  if(d>r){const g=Math.exp(-(d-r)*14)*streak+Math.exp(-(d-r)*60)*1.2;c=add(c,cor,g*.85)}
-  else{c=mixc(deep,hex('#3a2430'),ss(r*.2,r,d)*.6);c=add(c,cor,Math.exp(-(r-d)*90)*.9)}
-  // mist bands
-  for(let k=0;k<3;k++){const y0=.78+k*.11;const m=ss(y0-.06,y0+.08,v+.05*(fbm(u*3+k*9,k*3)-.5));const t=fbm(u*4+k*5,v*7,4);c=mixc(c,mixc(fog,hex('#8a5a5e'),k*.35),m*(.35+.45*t)*(1-k*.12))}
-  return c}},
-aurora(){const bg=hex('#0f1d22'),hz=hex('#3b5a57'),g1=hex('#9fe3c3'),g2=hex('#c38fd6'),land=hex('#0b1416');
- return(u,v)=>{let c=mixc(bg,hz,ss(.2,1.05,v));
-  for(let k=0;k<2;k++){const yc=.42+k*.14+.16*(fbm(u*1.3+k*4,k*2,4)-.5)+.05*Math.sin(u*9+k);
-   const above=yc-v;let b=0;
-   if(above>0)b=Math.exp(-above*(3.2+k*2))*(.35+.9*Math.pow(fbm(u*38+k*13,v*1.2,3),2.2));
-   else b=Math.exp(above*16)*.6;
-   const col=mixc(g1,g2,cl(above*2.6+k*.3));c=add(c,col,b*(.75-k*.25))}
-  // ridges
-  const ridge=1.0+.06*(fbm(u*3,1.7,5)-.5)-.02*Math.sin(u*4);if(v>ridge)c=mixc(land,hex('#1d2c2c'),.3*fbm(u*8,v*8,3));
-  else c=add(c,hex('#bfe8d6'),Math.exp(-(ridge-v)*30)*.12);
-  return c}},
-portal(){const a1=hex('#2b1838'),a2=hex('#7a4a78'),a3=hex('#e6a9a2'),core=hex('#fff0dc');
- return(u,v)=>{const cx=.5,cy=.58,dx=u-cx,dy=v-cy,d=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
-  const wx=fbm(u*2+3,v*2,4),wy=fbm(u*2,v*2+5,4);const n=fbm(u*2.4+wx*1.6,v*2.4+wy*1.6,5);
-  let c=mixc(a1,a2,ss(.25,.85,n));c=mixc(c,a3,ss(.55,.95,n)*.55);
-  const swirl=fbm(Math.cos(an+d*6)*2+9,Math.sin(an+d*6)*2+d*3,4);
-  c=add(c,a3,Math.exp(-d*5)*swirl*.9);c=add(c,core,Math.exp(-d*16)*1.1);
-  const ring=Math.exp(-Math.pow((d-.3)*55,2))*(.4+.6*swirl);c=add(c,core,ring*.35);
-  return c}},
-moonsea(){const top=hex('#1a2440'),mid=hex('#5a5f86'),low=hex('#d7a7a0'),water=hex('#141c30'),moon=hex('#fbefe0');
- return(u,v)=>{const hz=.78,mx=.5,my=.36;let c;
-  if(v<hz){c=mixc(top,mid,ss(0,.6,v));c=mixc(c,low,ss(.5,hz,v));
-   c=mixc(c,hex('#8d6f8f'),.3*ss(.4,.8,fbm(u*1.5,v*4,4)));
-   const d=Math.hypot(u-mx,v-my);c=add(c,moon,Math.exp(-d*9)*.45);if(d<.075)c=mixc(moon,hex('#d9cfc6'),.3*fbm(u*20,v*20,3));
-   else c=add(c,moon,Math.exp(-(d-.075)*70)*.6)}
-  else{const t=(v-hz)/(1.25-hz);c=mixc(mixc(low,water,.55),water,ss(0,.6,t));
-   const streak=fbm(u*5,v*90,3),wid=.05+t*.22,col=Math.exp(-Math.pow((u-mx)/wid,2));
-   c=add(c,moon,col*Math.pow(streak,3)*2.2*(1-t*.5));c=add(c,hex('#9a8bb0'),.08*fbm(u*3,v*40,3))}
-  return c}},
-rays(){const d1=hex('#2a1610'),d2=hex('#8b4a2e'),d3=hex('#e2a55c'),plum=hex('#4a2638'),lt=hex('#ffe7c2');
- return(u,v)=>{const wx=fbm(u*1.6,v*1.6,4),wy=fbm(u*1.6+4,v*1.6+2,4);const n=fbm(u*2+wx*2,v*2+wy*2,6);
-  let c=mixc(d1,plum,ss(.3,.6,wx));c=mixc(c,d2,ss(.4,.75,n));c=mixc(c,d3,ss(.65,.9,n)*.7);
-  const sx=.78,sy=.08,dx=u-sx,dy=v-sy,d=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
-  const ray=Math.pow(fbm(an*9+20,1.3,3),3)*2.4;c=add(c,lt,ray*Math.exp(-d*1.6)*.5*ss(.0,.2,d));
-  c=add(c,lt,Math.exp(-d*7)*.7);
-  return c}},
-dawn(){const t=hex('#2c2a44'),m=hex('#a07a9c'),b=hex('#f0c7a4'),cl2=hex('#f6dccb');
- return(u,v)=>{let c=mixc(t,m,ss(0,.7,v));c=mixc(c,b,ss(.6,1.2,v));
-  const wx=fbm(u*1.2,v*3,4);const n=fbm(u*1.8+wx,v*5+wx,5);
-  c=mixc(c,cl2,ss(.55,.85,n)*.45*ss(.2,.9,v));c=mixc(c,hex('#5c4466'),ss(.5,.2,n)*.25);
-  const d=Math.hypot(u-.5,(v-.42)*1.0);c=add(c,hex('#fff4e6'),Math.exp(-d*30)*.9+Math.exp(-d*5)*.18);
-  return c}}
-};
-// ---------- render ----------
-function paint(cv,name,seed,{matte='#2b2326',stars=0}={}){seedNoise(seed);const S=2,w=W/S,h=H/S;
- const off=document.createElement('canvas');off.width=w;off.height=h;const ox=off.getContext('2d'),im=ox.createImageData(w,h);
- const f=scenes[name](),M=hex(matte);
- for(let y=0;y<h;y++)for(let x=0;x<w;x++){const u=x/w,v=y/w;let c=f(u,v);
-  const l=.3*c[0]+.59*c[1]+.11*c[2];c=mixc(c,[l,l,l],.14);           // gentle desaturation
-  c=c.map((k,i)=>M[i]*.16+cl(k)*.82);                                 // faded matte: lifted blacks, soft highlights
-  const vg=1-.28*Math.pow(Math.hypot(u-.5,(v-.625)*.8)*1.4,2.2);c=c.map(k=>k*vg);
-  const o=(y*w+x)*4;im.data[o]=c[0]*255;im.data[o+1]=c[1]*255;im.data[o+2]=c[2]*255;im.data[o+3]=255}
- ox.putImageData(im,0,0);
- cv.width=W;cv.height=H;const g=cv.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(off,0,0,W,H);
- const r=rng(seed*7+1);
- for(let i=0;i<stars;i++){const x=r()*W,y=r()*H*.7,s=r()*1.4+.3;g.fillStyle=`rgba(255,246,232,${(r()*.6+.15)*(1-y/(H*.7))})`;g.beginPath();g.arc(x,y,s,0,7);g.fill()}
- if(name==='portal'){g.strokeStyle='rgba(255,236,220,.16)';g.lineWidth=1.2;const cx=W/2,cy=H*.58*W/H*1.25,R=150;
-  [[0,0]].concat([...Array(6)].map((_,k)=>[Math.cos(k*Math.PI/3)*R,Math.sin(k*Math.PI/3)*R])).forEach(([a,b])=>{g.beginPath();g.arc(cx+a,cy+b,R,0,7);g.stroke()});
-  g.beginPath();g.arc(cx,cy,R*2,0,7);g.stroke()}
- // film grain
- const gi=g.getImageData(0,0,W,H),d=gi.data;for(let i=0;i<d.length;i+=4){const n=(r()-.5)*22;d[i]+=n;d[i+1]+=n;d[i+2]+=n}g.putImageData(gi,0,0)}
+function paint(cv,idx,seed){gl.uniform2f(gl.getUniformLocation(prog,'R'),W,H);gl.uniform1f(gl.getUniformLocation(prog,'S'),idx);
+ gl.uniform1f(gl.getUniformLocation(prog,'SD'),seed);gl.drawArrays(gl.TRIANGLES,0,3);gl.finish();
+ cv.width=W;cv.height=H;const g=cv.getContext('2d');g.drawImage(gl_c,0,0);
+ const r=rng(seed*7+1),gi=g.getImageData(0,0,W,H),d=gi.data;for(let i=0;i<d.length;i+=4){const n=(r()-.5)*16;d[i]+=n;d[i+1]+=n;d[i+2]+=n}g.putImageData(gi,0,0)}
 // ---------- content ----------
 const slides=[
  {scene:'eclipse',seed:11,stars:120,cover:1,kick:'A gentle reminder',title:'Signs the universe<br>is <em>realigning</em> you',body:'Swipe if you’ve been feeling it lately.'},
@@ -117,10 +221,10 @@ document.getElementById('deck').innerHTML=slides.map((s,i)=>`<section class="sli
 ${s.cover?`<div class="txt center" style="top:${i==0?190:200}px">
  <div class="kick">${s.kick}</div><div class="rule"></div>
  <div class="title" style="font-size:${i==0?104:92}px">${s.title}</div>
- <div class="body" style="position:absolute;top:${i==0?860:870}px;left:0;right:0;font-size:30px;letter-spacing:.04em">${s.body}</div></div>`
+ <div class="body" style="position:absolute;top:${i==0?930:900}px;left:0;right:0;font-size:30px;letter-spacing:.04em">${s.body}</div></div>`
 :`<div class="txt" style="bottom:170px"><div class="num">${s.n}</div><div class="rule"></div>
  <div class="title" style="font-size:86px">${s.title}</div><div class="body" style="margin-top:34px">${s.body}</div></div>`}
 <div class="foot"><span>${HANDLE}</span><span>${String(i+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}</span></div></section>`).join('');
-document.querySelectorAll('.slide').forEach((el,i)=>paint(el.querySelector('canvas'),slides[i].scene,slides[i].seed,{stars:slides[i].stars}));
+document.querySelectorAll('.slide').forEach((el,i)=>paint(el.querySelector('canvas'),i,slides[i].seed%17+1.3));
 window.DONE=1;
 </script></body></html>
