@@ -1,75 +1,126 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *{margin:0;box-sizing:border-box}
 body{background:#000}
-.slide{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:Quicksand,sans-serif;color:#fdf2ff;
-background:radial-gradient(ellipse 70% 50% at 20% 15%,rgba(255,105,180,.45),transparent 70%),
-radial-gradient(ellipse 60% 55% at 85% 80%,rgba(120,80,255,.55),transparent 70%),
-radial-gradient(ellipse 50% 40% at 70% 30%,rgba(0,210,255,.22),transparent 70%),
-linear-gradient(160deg,#0b0420,#1a0838 55%,#07021a)}
-.stars{position:absolute;inset:0}
-.content{position:absolute;inset:0;padding:110px 96px;display:flex;flex-direction:column;justify-content:center}
-.kicker{font-weight:700;letter-spacing:.28em;text-transform:uppercase;font-size:26px;color:#ffb3e6}
-h1{font-family:Fraunces,serif;font-weight:600;font-size:112px;line-height:1.02;margin:28px 0;
-background:linear-gradient(100deg,#fff 10%,#ffc2ec 45%,#b9a6ff 85%);-webkit-background-clip:text;color:transparent;
-filter:drop-shadow(0 0 28px rgba(255,140,220,.45))}
-h2{font-family:Fraunces,serif;font-weight:600;font-size:84px;line-height:1.08;margin:22px 0 34px}
-p{font-size:40px;line-height:1.45;color:#e9dcff;max-width:860px}
-.num{font-family:Fraunces,serif;font-style:italic;font-size:200px;line-height:1;color:transparent;-webkit-text-stroke:3px #ff9ad9;opacity:.9}
-.handle{position:absolute;bottom:64px;left:96px;font-size:28px;font-weight:700;letter-spacing:.08em;color:#ffcff0}
-.dots{position:absolute;bottom:72px;right:96px;display:flex;gap:14px}
-.dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.3)}
-.dots i.on{background:#ff8fd6;box-shadow:0 0 14px #ff8fd6}
-.bunny{position:absolute}
-.planet{position:absolute;border-radius:50%}
-.swipe{margin-top:50px;font-size:32px;font-weight:700;color:#ffb3e6}
-.cta{display:inline-block;margin-top:44px;padding:26px 48px;border-radius:999px;font-size:36px;font-weight:700;
-background:linear-gradient(90deg,#ff79c6,#9d7bff);box-shadow:0 0 40px rgba(255,121,198,.6);color:#fff}
-</style></head><body>
-<template id="bunny">
-<svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
-<defs><radialGradient id="fur" cx="45%" cy="35%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f1dcff"/></radialGradient>
-<filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-<g filter="url(#glow)">
-<ellipse cx="105" cy="95" rx="30" ry="88" fill="url(#fur)" transform="rotate(-12 105 95)"/>
-<ellipse cx="105" cy="100" rx="14" ry="62" fill="#ffb3e0" transform="rotate(-12 105 100)"/>
-<ellipse cx="195" cy="95" rx="30" ry="88" fill="url(#fur)" transform="rotate(14 195 95)"/>
-<ellipse cx="195" cy="100" rx="14" ry="62" fill="#ffb3e0" transform="rotate(14 195 100)"/>
-<ellipse cx="150" cy="290" rx="92" ry="72" fill="url(#fur)"/>
-<circle cx="150" cy="210" r="82" fill="url(#fur)"/>
-</g>
-<path d="M118 205 q10-12 20 0" stroke="#3a1660" stroke-width="7" fill="none" stroke-linecap="round"/>
-<path d="M162 205 q10-12 20 0" stroke="#3a1660" stroke-width="7" fill="none" stroke-linecap="round"/>
-<ellipse cx="112" cy="232" rx="15" ry="9" fill="#ff9ad5" opacity=".7"/><ellipse cx="188" cy="232" rx="15" ry="9" fill="#ff9ad5" opacity=".7"/>
-<path d="M150 228 l-8 -7 h16z" fill="#ff7cc4"/><path d="M142 236 q8 8 16 0" stroke="#3a1660" stroke-width="5" fill="none" stroke-linecap="round"/>
-<path d="M150 300 c-14-16-38-4-24 14 l24 22 24-22 c14-18-10-30-24-14z" fill="#ff6fbf"/>
-<path d="M150 44 l6 14 15 2 -11 10 3 15 -13-8 -13 8 3-15 -11-10 15-2z" fill="#ffe27a"/>
-</svg></template>
-
-<div id="deck"></div>
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;color:#f6efe6}
+canvas{position:absolute;inset:0;width:1080px;height:1350px}
+.scrim{position:absolute;inset:0}
+.txt{position:absolute;left:110px;right:110px;font-family:Jost,sans-serif}
+.kick{font-weight:400;font-size:24px;letter-spacing:.42em;text-transform:uppercase;opacity:.82}
+.title{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.02;letter-spacing:-.01em;text-shadow:0 2px 40px rgba(0,0,0,.25)}
+.title em{font-style:italic;font-weight:400}
+.body{font-weight:300;font-size:36px;line-height:1.55;opacity:.9;max-width:780px}
+.num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:46px;opacity:.85}
+.rule{width:64px;height:1px;background:currentColor;opacity:.6;margin:34px 0}
+.foot{position:absolute;bottom:62px;left:110px;right:110px;display:flex;justify-content:space-between;font-family:Jost;font-weight:400;font-size:21px;letter-spacing:.32em;text-transform:uppercase;opacity:.7}
+.center{text-align:center}.center .rule{margin:34px auto}.center .body{margin:0 auto}
+</style></head><body><div id="deck"></div>
 <script>
-const H='@cosmiclovebunny';
+const W=1080,H=1350,HANDLE='@cosmiclovebunny';
+// ---------- noise ----------
+function rng(seed){let s=seed>>>0;return()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}}
+let P=new Uint8Array(512);function seedNoise(sd){const r=rng(sd);const p=[...Array(256).keys()];for(let i=255;i>0;i--){const j=Math.floor(r()*(i+1));[p[i],p[j]]=[p[j],p[i]]}for(let i=0;i<512;i++)P[i]=p[i&255]}
+const fade=t=>t*t*t*(t*(t*6-15)+10),lerp=(a,b,t)=>a+(b-a)*t;
+function grad(h,x,y){const g=h&7;const u=g<4?x:y,v=g<4?y:x;return((g&1)?-u:u)+((g&2)?-2*v:2*v)}
+function noise(x,y){const X=Math.floor(x)&255,Y=Math.floor(y)&255;x-=Math.floor(x);y-=Math.floor(y);const u=fade(x),v=fade(y);
+const a=P[X]+Y,b=P[X+1]+Y;return lerp(lerp(grad(P[a],x,y),grad(P[b],x-1,y),u),lerp(grad(P[a+1],x,y-1),grad(P[b+1],x-1,y-1),u),v)*.35+.5}
+function fbm(x,y,o=5){let s=0,a=.5,f=1,n=0;for(let i=0;i<o;i++){s+=a*noise(x*f,y*f);n+=a;a*=.5;f*=2.03}return s/n}
+const cl=x=>x<0?0:x>1?1:x,ss=(a,b,x)=>{const t=cl((x-a)/(b-a));return t*t*(3-2*t)};
+const hex=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16)/255);
+const mixc=(a,b,t)=>[lerp(a[0],b[0],t),lerp(a[1],b[1],t),lerp(a[2],b[2],t)];
+const add=(a,b,k)=>[a[0]+b[0]*k,a[1]+b[1]*k,a[2]+b[2]*k];
+// ---------- scenes: f(u,v) -> rgb, u in [0,1], v in [0,1.25] ----------
+const scenes={
+eclipse(){const sky=hex('#2a1e2e'),hz=hex('#c98a6b'),fog=hex('#e8c3a8'),cor=hex('#ffd9b0'),deep=hex('#120c14');
+ return(u,v)=>{const cx=.5,cy=.63,r=.14;let c=mixc(sky,hz,ss(.15,.82,v));
+  c=mixc(c,hex('#6a3f52'),.35*fbm(u*2.2,v*1.6,4));
+  const dx=u-cx,dy=v-cy,d=Math.hypot(dx,dy),a=Math.atan2(dy,dx);
+  const streak=.55+.9*fbm(Math.cos(a)*3+7,Math.sin(a)*3+d*2,4);
+  if(d>r){const g=Math.exp(-(d-r)*14)*streak+Math.exp(-(d-r)*60)*1.2;c=add(c,cor,g*.85)}
+  else{c=mixc(deep,hex('#3a2430'),ss(r*.2,r,d)*.6);c=add(c,cor,Math.exp(-(r-d)*90)*.9)}
+  // mist bands
+  for(let k=0;k<3;k++){const y0=.78+k*.11;const m=ss(y0-.06,y0+.08,v+.05*(fbm(u*3+k*9,k*3)-.5));const t=fbm(u*4+k*5,v*7,4);c=mixc(c,mixc(fog,hex('#8a5a5e'),k*.35),m*(.35+.45*t)*(1-k*.12))}
+  return c}},
+aurora(){const bg=hex('#0f1d22'),hz=hex('#3b5a57'),g1=hex('#9fe3c3'),g2=hex('#c38fd6'),land=hex('#0b1416');
+ return(u,v)=>{let c=mixc(bg,hz,ss(.2,1.05,v));
+  for(let k=0;k<2;k++){const yc=.42+k*.14+.16*(fbm(u*1.3+k*4,k*2,4)-.5)+.05*Math.sin(u*9+k);
+   const above=yc-v;let b=0;
+   if(above>0)b=Math.exp(-above*(3.2+k*2))*(.35+.9*Math.pow(fbm(u*38+k*13,v*1.2,3),2.2));
+   else b=Math.exp(above*16)*.6;
+   const col=mixc(g1,g2,cl(above*2.6+k*.3));c=add(c,col,b*(.75-k*.25))}
+  // ridges
+  const ridge=1.0+.06*(fbm(u*3,1.7,5)-.5)-.02*Math.sin(u*4);if(v>ridge)c=mixc(land,hex('#1d2c2c'),.3*fbm(u*8,v*8,3));
+  else c=add(c,hex('#bfe8d6'),Math.exp(-(ridge-v)*30)*.12);
+  return c}},
+portal(){const a1=hex('#2b1838'),a2=hex('#7a4a78'),a3=hex('#e6a9a2'),core=hex('#fff0dc');
+ return(u,v)=>{const cx=.5,cy=.58,dx=u-cx,dy=v-cy,d=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
+  const wx=fbm(u*2+3,v*2,4),wy=fbm(u*2,v*2+5,4);const n=fbm(u*2.4+wx*1.6,v*2.4+wy*1.6,5);
+  let c=mixc(a1,a2,ss(.25,.85,n));c=mixc(c,a3,ss(.55,.95,n)*.55);
+  const swirl=fbm(Math.cos(an+d*6)*2+9,Math.sin(an+d*6)*2+d*3,4);
+  c=add(c,a3,Math.exp(-d*5)*swirl*.9);c=add(c,core,Math.exp(-d*16)*1.1);
+  const ring=Math.exp(-Math.pow((d-.3)*55,2))*(.4+.6*swirl);c=add(c,core,ring*.35);
+  return c}},
+moonsea(){const top=hex('#1a2440'),mid=hex('#5a5f86'),low=hex('#d7a7a0'),water=hex('#141c30'),moon=hex('#fbefe0');
+ return(u,v)=>{const hz=.78,mx=.5,my=.36;let c;
+  if(v<hz){c=mixc(top,mid,ss(0,.6,v));c=mixc(c,low,ss(.5,hz,v));
+   c=mixc(c,hex('#8d6f8f'),.3*ss(.4,.8,fbm(u*1.5,v*4,4)));
+   const d=Math.hypot(u-mx,v-my);c=add(c,moon,Math.exp(-d*9)*.45);if(d<.075)c=mixc(moon,hex('#d9cfc6'),.3*fbm(u*20,v*20,3));
+   else c=add(c,moon,Math.exp(-(d-.075)*70)*.6)}
+  else{const t=(v-hz)/(1.25-hz);c=mixc(mixc(low,water,.55),water,ss(0,.6,t));
+   const streak=fbm(u*5,v*90,3),wid=.05+t*.22,col=Math.exp(-Math.pow((u-mx)/wid,2));
+   c=add(c,moon,col*Math.pow(streak,3)*2.2*(1-t*.5));c=add(c,hex('#9a8bb0'),.08*fbm(u*3,v*40,3))}
+  return c}},
+rays(){const d1=hex('#2a1610'),d2=hex('#8b4a2e'),d3=hex('#e2a55c'),plum=hex('#4a2638'),lt=hex('#ffe7c2');
+ return(u,v)=>{const wx=fbm(u*1.6,v*1.6,4),wy=fbm(u*1.6+4,v*1.6+2,4);const n=fbm(u*2+wx*2,v*2+wy*2,6);
+  let c=mixc(d1,plum,ss(.3,.6,wx));c=mixc(c,d2,ss(.4,.75,n));c=mixc(c,d3,ss(.65,.9,n)*.7);
+  const sx=.78,sy=.08,dx=u-sx,dy=v-sy,d=Math.hypot(dx,dy),an=Math.atan2(dy,dx);
+  const ray=Math.pow(fbm(an*9+20,1.3,3),3)*2.4;c=add(c,lt,ray*Math.exp(-d*1.6)*.5*ss(.0,.2,d));
+  c=add(c,lt,Math.exp(-d*7)*.7);
+  return c}},
+dawn(){const t=hex('#2c2a44'),m=hex('#a07a9c'),b=hex('#f0c7a4'),cl2=hex('#f6dccb');
+ return(u,v)=>{let c=mixc(t,m,ss(0,.7,v));c=mixc(c,b,ss(.6,1.2,v));
+  const wx=fbm(u*1.2,v*3,4);const n=fbm(u*1.8+wx,v*5+wx,5);
+  c=mixc(c,cl2,ss(.55,.85,n)*.45*ss(.2,.9,v));c=mixc(c,hex('#5c4466'),ss(.5,.2,n)*.25);
+  const d=Math.hypot(u-.5,(v-.42)*1.0);c=add(c,hex('#fff4e6'),Math.exp(-d*30)*.9+Math.exp(-d*5)*.18);
+  return c}}
+};
+// ---------- render ----------
+function paint(cv,name,seed,{matte='#2b2326',stars=0}={}){seedNoise(seed);const S=2,w=W/S,h=H/S;
+ const off=document.createElement('canvas');off.width=w;off.height=h;const ox=off.getContext('2d'),im=ox.createImageData(w,h);
+ const f=scenes[name](),M=hex(matte);
+ for(let y=0;y<h;y++)for(let x=0;x<w;x++){const u=x/w,v=y/w;let c=f(u,v);
+  const l=.3*c[0]+.59*c[1]+.11*c[2];c=mixc(c,[l,l,l],.14);           // gentle desaturation
+  c=c.map((k,i)=>M[i]*.16+cl(k)*.82);                                 // faded matte: lifted blacks, soft highlights
+  const vg=1-.28*Math.pow(Math.hypot(u-.5,(v-.625)*.8)*1.4,2.2);c=c.map(k=>k*vg);
+  const o=(y*w+x)*4;im.data[o]=c[0]*255;im.data[o+1]=c[1]*255;im.data[o+2]=c[2]*255;im.data[o+3]=255}
+ ox.putImageData(im,0,0);
+ cv.width=W;cv.height=H;const g=cv.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(off,0,0,W,H);
+ const r=rng(seed*7+1);
+ for(let i=0;i<stars;i++){const x=r()*W,y=r()*H*.7,s=r()*1.4+.3;g.fillStyle=`rgba(255,246,232,${(r()*.6+.15)*(1-y/(H*.7))})`;g.beginPath();g.arc(x,y,s,0,7);g.fill()}
+ if(name==='portal'){g.strokeStyle='rgba(255,236,220,.16)';g.lineWidth=1.2;const cx=W/2,cy=H*.58*W/H*1.25,R=150;
+  [[0,0]].concat([...Array(6)].map((_,k)=>[Math.cos(k*Math.PI/3)*R,Math.sin(k*Math.PI/3)*R])).forEach(([a,b])=>{g.beginPath();g.arc(cx+a,cy+b,R,0,7);g.stroke()});
+  g.beginPath();g.arc(cx,cy,R*2,0,7);g.stroke()}
+ // film grain
+ const gi=g.getImageData(0,0,W,H),d=gi.data;for(let i=0;i<d.length;i+=4){const n=(r()-.5)*22;d[i]+=n;d[i+1]+=n;d[i+2]+=n}g.putImageData(gi,0,0)}
+// ---------- content ----------
 const slides=[
- {k:'a little starlight for you',t:'h1',title:'Love is the gravity that holds us',body:'5 cosmic reminders for your heart this week ✦',swipe:'swipe through the stars →',bunny:[600,700,440]},
- {n:'01',title:'You are made of stardust',body:'Every atom in you was forged in a star. Being soft and bright is what you were built for.'},
- {n:'02',title:'Orbit people who pull you closer',body:'The right ones don\'t drain your light. They make it brighter, the way moons catch the sun.'},
- {n:'03',title:'Even stars rest in the dark',body:'Slow days are part of your cycle. Healing doesn\'t have to look like shining.'},
- {n:'04',title:'Send love out like light',body:'A kind word travels farther than you\'ll ever see. Send one today.'},
- {k:'from our little galaxy to yours',title:'Which reminder did you need?',body:'Tell us in the comments, and share this with someone who lights up your sky 💫',cta:'Follow '+H,bunny:[690,880,300]},
+ {scene:'eclipse',seed:11,stars:120,cover:1,kick:'A gentle reminder',title:'Signs the universe<br>is <em>realigning</em> you',body:'Swipe if you’ve been feeling it lately.'},
+ {scene:'aurora',seed:23,stars:260,n:'i.',title:'You crave <em>solitude</em><br>more than ever',body:'It isn’t loneliness. Your spirit is clearing space for what’s on its way to you.'},
+ {scene:'portal',seed:37,stars:90,n:'ii.',title:'Old versions of you<br><em>stop fitting</em>',body:'What once felt like home starts to feel small. That isn’t loss. It’s expansion.'},
+ {scene:'moonsea',seed:41,stars:200,n:'iii.',title:'The same signs keep<br><em>finding you</em>',body:'Repeating numbers, the right song, timing too precise to be chance. You are being guided.'},
+ {scene:'rays',seed:59,stars:60,n:'iv.',title:'Your intuition<br>grows <em>louder</em>',body:'You sense things before they unfold. Stop second-guessing the quiet voice. It has never lied to you.'},
+ {scene:'dawn',seed:71,stars:140,cover:1,kick:'Hold onto this',title:'Everything is arriving<br><em>right on time</em>',body:'Save this for the days you forget. Send it to someone who needs the sign.'},
 ];
-function stars(seed){let s=seed,r=()=>(s=(s*9301+49297)%233280)/233280,o='';
- for(let i=0;i<170;i++){const x=r()*1080,y=r()*1350,z=r()*2.4+.4,a=r()*.8+.2;o+=`<circle cx="${x}" cy="${y}" r="${z}" fill="#fff" opacity="${a}"/>`}
- for(let i=0;i<6;i++){const x=r()*1080,y=r()*1350;o+=`<path d="M${x} ${y-14}L${x+3} ${y-3}L${x+14} ${y}L${x+3} ${y+3}L${x} ${y+14}L${x-3} ${y+3}L${x-14} ${y}L${x-3} ${y-3}Z" fill="#fff" opacity=".9"/>`}
- return `<svg class="stars" viewBox="0 0 1080 1350">${o}</svg>`}
-const bun=document.getElementById('bunny').innerHTML;
-document.getElementById('deck').innerHTML=slides.map((s,i)=>`<section class="slide" id="s${i+1}">${stars(i*77+13)}
-<div class="planet" style="width:${180+i*30}px;height:${180+i*30}px;right:${-60+i*12}px;top:${-50+i*20}px;background:radial-gradient(circle at 30% 30%,#ffd1f0,#b45cff 60%,#3b0f6e);opacity:.55;box-shadow:0 0 80px rgba(200,120,255,.5)"></div>
-${s.bunny?`<div class="bunny" style="left:${s.bunny[0]}px;top:${s.bunny[1]}px;width:${s.bunny[2]}px">${bun}</div>`:`<div class="bunny" style="right:70px;bottom:130px;width:170px;opacity:.95">${bun}</div>`}
-<div class="content" style="${s.bunny&&i==0?'justify-content:flex-start;padding-top:170px':''}">
-${s.k?`<div class="kicker">✦ ${s.k}</div>`:''}${s.n?`<div class="num">${s.n}</div>`:''}
-${s.t=='h1'?`<h1>${s.title}</h1>`:`<h2>${s.title}</h2>`}<p>${s.body}</p>
-${s.swipe?`<div class="swipe">${s.swipe}</div>`:''}${s.cta?`<div><span class="cta">${s.cta}</span></div>`:''}
-</div><div class="handle">${H}</div>
-<div class="dots">${slides.map((_,j)=>`<i class="${j==i?'on':''}"></i>`).join('')}</div></section>`).join('');
+document.getElementById('deck').innerHTML=slides.map((s,i)=>`<section class="slide" id="s${i+1}"><canvas></canvas>
+<div class="scrim" style="background:linear-gradient(${s.cover?'180deg,rgba(0,0,0,.18),transparent 30%,transparent 70%,rgba(0,0,0,.25)':'0deg,rgba(10,6,10,.55),rgba(10,6,10,.15) 45%,transparent 70%'})"></div>
+${s.cover?`<div class="txt center" style="top:${i==0?190:200}px">
+ <div class="kick">${s.kick}</div><div class="rule"></div>
+ <div class="title" style="font-size:${i==0?104:92}px">${s.title}</div>
+ <div class="body" style="position:absolute;top:${i==0?860:870}px;left:0;right:0;font-size:30px;letter-spacing:.04em">${s.body}</div></div>`
+:`<div class="txt" style="bottom:170px"><div class="num">${s.n}</div><div class="rule"></div>
+ <div class="title" style="font-size:86px">${s.title}</div><div class="body" style="margin-top:34px">${s.body}</div></div>`}
+<div class="foot"><span>${HANDLE}</span><span>${String(i+1).padStart(2,'0')} / ${String(slides.length).padStart(2,'0')}</span></div></section>`).join('');
+document.querySelectorAll('.slide').forEach((el,i)=>paint(el.querySelector('canvas'),slides[i].scene,slides[i].seed,{stars:slides[i].stars}));
+window.DONE=1;
 </script></body></html>
