@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}
+body{background:#000}
+.slide{width:1080px;height:1350px;position:relative;overflow:hidden;font-family:Quicksand,sans-serif;color:#fdf2ff;
+background:radial-gradient(ellipse 70% 50% at 20% 15%,rgba(255,105,180,.45),transparent 70%),
+radial-gradient(ellipse 60% 55% at 85% 80%,rgba(120,80,255,.55),transparent 70%),
+radial-gradient(ellipse 50% 40% at 70% 30%,rgba(0,210,255,.22),transparent 70%),
+linear-gradient(160deg,#0b0420,#1a0838 55%,#07021a)}
+.stars{position:absolute;inset:0}
+.content{position:absolute;inset:0;padding:110px 96px;display:flex;flex-direction:column;justify-content:center}
+.kicker{font-weight:700;letter-spacing:.28em;text-transform:uppercase;font-size:26px;color:#ffb3e6}
+h1{font-family:Fraunces,serif;font-weight:600;font-size:112px;line-height:1.02;margin:28px 0;
+background:linear-gradient(100deg,#fff 10%,#ffc2ec 45%,#b9a6ff 85%);-webkit-background-clip:text;color:transparent;
+filter:drop-shadow(0 0 28px rgba(255,140,220,.45))}
+h2{font-family:Fraunces,serif;font-weight:600;font-size:84px;line-height:1.08;margin:22px 0 34px}
+p{font-size:40px;line-height:1.45;color:#e9dcff;max-width:860px}
+.num{font-family:Fraunces,serif;font-style:italic;font-size:200px;line-height:1;color:transparent;-webkit-text-stroke:3px #ff9ad9;opacity:.9}
+.handle{position:absolute;bottom:64px;left:96px;font-size:28px;font-weight:700;letter-spacing:.08em;color:#ffcff0}
+.dots{position:absolute;bottom:72px;right:96px;display:flex;gap:14px}
+.dots i{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.3)}
+.dots i.on{background:#ff8fd6;box-shadow:0 0 14px #ff8fd6}
+.bunny{position:absolute}
+.planet{position:absolute;border-radius:50%}
+.swipe{margin-top:50px;font-size:32px;font-weight:700;color:#ffb3e6}
+.cta{display:inline-block;margin-top:44px;padding:26px 48px;border-radius:999px;font-size:36px;font-weight:700;
+background:linear-gradient(90deg,#ff79c6,#9d7bff);box-shadow:0 0 40px rgba(255,121,198,.6);color:#fff}
+</style></head><body>
+<template id="bunny">
+<svg viewBox="0 0 300 360" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="fur" cx="45%" cy="35%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f1dcff"/></radialGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<g filter="url(#glow)">
+<ellipse cx="105" cy="95" rx="30" ry="88" fill="url(#fur)" transform="rotate(-12 105 95)"/>
+<ellipse cx="105" cy="100" rx="14" ry="62" fill="#ffb3e0" transform="rotate(-12 105 100)"/>
+<ellipse cx="195" cy="95" rx="30" ry="88" fill="url(#fur)" transform="rotate(14 195 95)"/>
+<ellipse cx="195" cy="100" rx="14" ry="62" fill="#ffb3e0" transform="rotate(14 195 100)"/>
+<ellipse cx="150" cy="290" rx="92" ry="72" fill="url(#fur)"/>
+<circle cx="150" cy="210" r="82" fill="url(#fur)"/>
+</g>
+<path d="M118 205 q10-12 20 0" stroke="#3a1660" stroke-width="7" fill="none" stroke-linecap="round"/>
+<path d="M162 205 q10-12 20 0" stroke="#3a1660" stroke-width="7" fill="none" stroke-linecap="round"/>
+<ellipse cx="112" cy="232" rx="15" ry="9" fill="#ff9ad5" opacity=".7"/><ellipse cx="188" cy="232" rx="15" ry="9" fill="#ff9ad5" opacity=".7"/>
+<path d="M150 228 l-8 -7 h16z" fill="#ff7cc4"/><path d="M142 236 q8 8 16 0" stroke="#3a1660" stroke-width="5" fill="none" stroke-linecap="round"/>
+<path d="M150 300 c-14-16-38-4-24 14 l24 22 24-22 c14-18-10-30-24-14z" fill="#ff6fbf"/>
+<path d="M150 44 l6 14 15 2 -11 10 3 15 -13-8 -13 8 3-15 -11-10 15-2z" fill="#ffe27a"/>
+</svg></template>
+
+<div id="deck"></div>
+<script>
+const H='@cosmiclovebunny';
+const slides=[
+ {k:'a little starlight for you',t:'h1',title:'Love is the gravity that holds us',body:'5 cosmic reminders for your heart this week ✦',swipe:'swipe through the stars →',bunny:[600,700,440]},
+ {n:'01',title:'You are made of stardust',body:'Every atom in you was forged in a star. Being soft and bright is what you were built for.'},
+ {n:'02',title:'Orbit people who pull you closer',body:'The right ones don\'t drain your light. They make it brighter, the way moons catch the sun.'},
+ {n:'03',title:'Even stars rest in the dark',body:'Slow days are part of your cycle. Healing doesn\'t have to look like shining.'},
+ {n:'04',title:'Send love out like light',body:'A kind word travels farther than you\'ll ever see. Send one today.'},
+ {k:'from our little galaxy to yours',title:'Which reminder did you need?',body:'Tell us in the comments, and share this with someone who lights up your sky 💫',cta:'Follow '+H,bunny:[690,880,300]},
+];
+function stars(seed){let s=seed,r=()=>(s=(s*9301+49297)%233280)/233280,o='';
+ for(let i=0;i<170;i++){const x=r()*1080,y=r()*1350,z=r()*2.4+.4,a=r()*.8+.2;o+=`<circle cx="${x}" cy="${y}" r="${z}" fill="#fff" opacity="${a}"/>`}
+ for(let i=0;i<6;i++){const x=r()*1080,y=r()*1350;o+=`<path d="M${x} ${y-14}L${x+3} ${y-3}L${x+14} ${y}L${x+3} ${y+3}L${x} ${y+14}L${x-3} ${y+3}L${x-14} ${y}L${x-3} ${y-3}Z" fill="#fff" opacity=".9"/>`}
+ return `<svg class="stars" viewBox="0 0 1080 1350">${o}</svg>`}
+const bun=document.getElementById('bunny').innerHTML;
+document.getElementById('deck').innerHTML=slides.map((s,i)=>`<section class="slide" id="s${i+1}">${stars(i*77+13)}
+<div class="planet" style="width:${180+i*30}px;height:${180+i*30}px;right:${-60+i*12}px;top:${-50+i*20}px;background:radial-gradient(circle at 30% 30%,#ffd1f0,#b45cff 60%,#3b0f6e);opacity:.55;box-shadow:0 0 80px rgba(200,120,255,.5)"></div>
+${s.bunny?`<div class="bunny" style="left:${s.bunny[0]}px;top:${s.bunny[1]}px;width:${s.bunny[2]}px">${bun}</div>`:`<div class="bunny" style="right:70px;bottom:130px;width:170px;opacity:.95">${bun}</div>`}
+<div class="content" style="${s.bunny&&i==0?'justify-content:flex-start;padding-top:170px':''}">
+${s.k?`<div class="kicker">✦ ${s.k}</div>`:''}${s.n?`<div class="num">${s.n}</div>`:''}
+${s.t=='h1'?`<h1>${s.title}</h1>`:`<h2>${s.title}</h2>`}<p>${s.body}</p>
+${s.swipe?`<div class="swipe">${s.swipe}</div>`:''}${s.cta?`<div><span class="cta">${s.cta}</span></div>`:''}
+</div><div class="handle">${H}</div>
+<div class="dots">${slides.map((_,j)=>`<i class="${j==i?'on':''}"></i>`).join('')}</div></section>`).join('');
+</script></body></html>
